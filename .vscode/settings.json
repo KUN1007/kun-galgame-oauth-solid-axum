@@ -1,12 +1,22 @@
 {
   "cSpell.words": [
+    "Avenir",
     "chrono",
+    "daisyui",
+    "dotenv",
     "dotenvy",
     "galgame",
+    "iconify",
     "jsonwebtoken",
+    "kungal",
+    "kungalgame",
+    "milkdown",
+    "morphism",
     "njsproj",
     "ntvs",
+    "PKCE",
     "serde",
+    "solidjs",
     "sqlx",
     "thiserror"
   ]

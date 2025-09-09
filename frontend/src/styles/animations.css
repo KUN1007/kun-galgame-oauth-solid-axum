@@ -1,0 +1,10 @@
+@keyframes ripple-animation {
+  from {
+    transform: scale(0);
+    opacity: 0.4;
+  }
+  to {
+    transform: scale(4);
+    opacity: 0;
+  }
+}

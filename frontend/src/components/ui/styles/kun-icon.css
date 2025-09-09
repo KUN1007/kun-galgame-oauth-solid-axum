@@ -1,0 +1,6 @@
+.kun-icon svg path,
+.kun-icon svg g,
+.kun-icon svg rect,
+.kun-icon svg circle {
+  color: inherit;
+}

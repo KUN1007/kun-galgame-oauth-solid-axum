@@ -1,17 +1,11 @@
-import { createSignal, onMount } from 'solid-js'
-import './App.css'
+import { Router, Route } from '@solidjs/router'
+import { onMount } from 'solid-js'
+import { KunHome } from './pages/Home'
 
 export default function Kun() {
-  const [moe, setMoe] = createSignal('')
-  onMount(async () => {
-    const res = await fetch('/api/moe')
-    const data = await res.json()
-    setMoe(data.message)
-  })
-
   return (
-    <>
-      <button>{moe()}</button>
-    </>
+    <Router>
+      <Route path="/" component={KunHome} />
+    </Router>
   )
 }

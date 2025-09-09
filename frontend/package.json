@@ -9,9 +9,15 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "solid-js": "^1.9.9"
+    "@solidjs/router": "^0.15.3",
+    "@tailwindcss/vite": "^4.1.13",
+    "clsx": "^2.1.1",
+    "solid-js": "^1.9.9",
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.13"
   },
   "devDependencies": {
+    "@iconify-icon/solid": "^3.0.0",
     "@types/node": "^24.3.1",
     "typescript": "~5.9.2",
     "vite": "^7.1.5",

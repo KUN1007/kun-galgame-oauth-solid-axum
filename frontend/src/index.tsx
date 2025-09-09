@@ -1,8 +1,7 @@
-/* @refresh reload */
 import { render } from 'solid-js/web'
-import './index.css'
+import './styles/index.css'
 import App from './App.tsx'
 
-const root = document.getElementById('root')
+const root = document.getElementById('kun-moe-app')
 
 render(() => <App />, root!)
