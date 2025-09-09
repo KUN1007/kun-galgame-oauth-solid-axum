@@ -1,0 +1,9 @@
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - '1314:1314'
+    environment:
+      KUN_DATABASE_URL: ''
