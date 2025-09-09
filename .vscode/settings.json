@@ -6,6 +6,7 @@
     "dotenv",
     "dotenvy",
     "galgame",
+    "Hoverable",
     "iconify",
     "jsonwebtoken",
     "kungal",
@@ -15,9 +16,11 @@
     "njsproj",
     "ntvs",
     "PKCE",
+    "Pressable",
     "serde",
     "solidjs",
     "sqlx",
-    "thiserror"
+    "thiserror",
+    "VNDB"
   ]
 }

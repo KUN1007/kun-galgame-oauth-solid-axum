@@ -1,0 +1,43 @@
+@keyframes shrink {
+  from {
+    width: 100%;
+  }
+  to {
+    width: 0%;
+  }
+}
+
+.progress-bar {
+  animation: shrink linear forwards;
+  animation-play-state: running;
+}
+
+.message-list-move {
+  transition: transform 0.6s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+}
+
+.message-list-enter-active {
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.message-list-exit-active {
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: absolute;
+  width: calc(100% - 2rem);
+}
+
+.message-list-enter,
+.message-list-exit-to {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+[class*='top-'] .message-list-enter,
+[class*='top-'] .message-list-exit-to {
+  transform: translateY(-30px) scale(0.8);
+}
+
+[class*='bottom-'] .message-list-enter,
+[class*='bottom-'] .message-list-exit-to {
+  transform: translateY(30px) scale(0.8);
+}
