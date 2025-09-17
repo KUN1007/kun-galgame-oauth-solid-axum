@@ -1,4 +1,4 @@
-import { type Component, createMemo, For, Show } from 'solid-js'
+import { type Component, createMemo, For } from 'solid-js'
 import { TransitionGroup } from 'solid-transition-group'
 import {
   createMessageState,

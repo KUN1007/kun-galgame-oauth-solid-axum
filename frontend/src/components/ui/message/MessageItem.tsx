@@ -127,7 +127,7 @@ export const MessageItem: Component<MessageItemProps> = (props) => {
       onMouseLeave={resumeTimer}
     >
       <Icon
-        class={cn('mt-0.5 mr-3 h-6 w-6 flex-shrink-0', typeStyles().icon)}
+        class={cn('mr-3 h-6 w-6 flex flex-shrink-0', typeStyles().icon)}
         icon={typeStyles().iconName}
       />
 
