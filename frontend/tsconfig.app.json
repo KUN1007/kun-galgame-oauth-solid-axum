@@ -37,12 +37,5 @@
     "src/**/**/*.d.ts",
     "src/**/*.tsx"
   ],
-  "exclude": [
-    "node_modules",
-    "dist",
-    "src/components/kun/alert/loli.ts",
-    "src/components/kun/capture/**",
-    "src/components/kun/milkdown/**",
-    "src/components/kun/date-picker/useCalendar.ts"
-  ]
+  "exclude": ["node_modules", "dist"]
 }

@@ -117,7 +117,7 @@ export const KunCard: ParentComponent<KunCardProps> = (props) => {
       {...others}
     >
       <Show when={local.header}>
-        <div class="border-b">{local.header}</div>
+        <div>{local.header}</div>
       </Show>
 
       <Show when={local.cover}>

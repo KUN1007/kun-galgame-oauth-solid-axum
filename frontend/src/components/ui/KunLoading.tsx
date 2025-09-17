@@ -1,4 +1,4 @@
-import { type Component, JSX, Show, children, createMemo } from 'solid-js'
+import { type Component, type JSX, Show, children, createMemo } from 'solid-js'
 import { KunImage } from './KunImage'
 import { cn } from '~/utils/cn'
 

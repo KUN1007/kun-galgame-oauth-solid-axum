@@ -1,4 +1,4 @@
-import { type Component, JSX } from 'solid-js'
+import { type Component, type JSX } from 'solid-js'
 import { cn } from '~/utils/cn'
 import KunDivider from './KunDivider'
 
