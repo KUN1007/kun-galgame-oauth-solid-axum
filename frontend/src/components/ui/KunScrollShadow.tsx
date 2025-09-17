@@ -26,12 +26,18 @@ export const KunScrollShadow: Component<KunScrollShadowProps> = (props) => {
     if (axis === 'horizontal') {
       setShowStart(scrollContainer.scrollLeft > epsilon)
       setShowEnd(
-        contentWrapper.scrollWidth - scrollContainer.clientWidth - scrollContainer.scrollLeft > epsilon,
+        contentWrapper.scrollWidth -
+          scrollContainer.clientWidth -
+          scrollContainer.scrollLeft >
+          epsilon
       )
     } else {
       setShowStart(scrollContainer.scrollTop > epsilon)
       setShowEnd(
-        contentWrapper.scrollHeight - scrollContainer.clientHeight - scrollContainer.scrollTop > epsilon,
+        contentWrapper.scrollHeight -
+          scrollContainer.clientHeight -
+          scrollContainer.scrollTop >
+          epsilon
       )
     }
   }
@@ -41,7 +47,9 @@ export const KunScrollShadow: Component<KunScrollShadowProps> = (props) => {
 
   onMount(() => {
     update()
-    scrollContainer?.addEventListener('scroll', onScroll, { passive: true } as any)
+    scrollContainer?.addEventListener('scroll', onScroll, {
+      passive: true
+    } as any)
     window.addEventListener('resize', onResize)
   })
   onCleanup(() => {
@@ -49,40 +57,59 @@ export const KunScrollShadow: Component<KunScrollShadowProps> = (props) => {
     window.removeEventListener('resize', onResize)
   })
 
-  const startShadowClasses = axis === 'horizontal' ? 'left-0 top-0 bottom-0' : 'top-0 left-0 right-0'
-  const endShadowClasses = axis === 'horizontal' ? 'right-0 top-0 bottom-0' : 'bottom-0 left-0 right-0'
+  const startShadowClasses =
+    axis === 'horizontal' ? 'left-0 top-0 bottom-0' : 'top-0 left-0 right-0'
+  const endShadowClasses =
+    axis === 'horizontal' ? 'right-0 top-0 bottom-0' : 'bottom-0 left-0 right-0'
 
   const startStyle = {
     [axis === 'horizontal' ? 'width' : 'height']: shadowSize,
-    'background-image': axis === 'horizontal'
-      ? `linear-gradient(to right, ${shadowColor}, transparent)`
-      : `linear-gradient(to bottom, ${shadowColor}, transparent)`,
+    'background-image':
+      axis === 'horizontal'
+        ? `linear-gradient(to right, ${shadowColor}, transparent)`
+        : `linear-gradient(to bottom, ${shadowColor}, transparent)`
   } as any
   const endStyle = {
     [axis === 'horizontal' ? 'width' : 'height']: shadowSize,
-    'background-image': axis === 'horizontal'
-      ? `linear-gradient(to left, ${shadowColor}, transparent)`
-      : `linear-gradient(to top, ${shadowColor}, transparent)`,
+    'background-image':
+      axis === 'horizontal'
+        ? `linear-gradient(to left, ${shadowColor}, transparent)`
+        : `linear-gradient(to top, ${shadowColor}, transparent)`
   } as any
 
   return (
     <div class="relative">
       <div
         aria-hidden="true"
-        class={cn('pointer-events-none absolute z-10 transition-opacity', startShadowClasses, showStart() ? 'opacity-100' : 'opacity-0')}
+        class={cn(
+          'pointer-events-none absolute z-10 transition-opacity',
+          startShadowClasses,
+          showStart() ? 'opacity-100' : 'opacity-0'
+        )}
         style={startStyle}
       />
       <div
         ref={(el) => (scrollContainer = el)}
-        class={cn('scrollbar-hide', axis === 'horizontal' ? 'overflow-x-auto' : 'overflow-y-auto', props.class)}
+        class={cn(
+          'scrollbar-hide',
+          axis === 'horizontal' ? 'overflow-x-auto' : 'overflow-y-auto',
+          props.class
+        )}
       >
-        <div ref={(el) => (contentWrapper = el)} class={axis === 'horizontal' ? 'w-fit' : ''}>
+        <div
+          ref={(el) => (contentWrapper = el)}
+          class={axis === 'horizontal' ? 'w-fit' : ''}
+        >
           {props.children}
         </div>
       </div>
       <div
         aria-hidden="true"
-        class={cn('pointer-events-none absolute z-10 transition-opacity', endShadowClasses, showEnd() ? 'opacity-100' : 'opacity-0')}
+        class={cn(
+          'pointer-events-none absolute z-10 transition-opacity',
+          endShadowClasses,
+          showEnd() ? 'opacity-100' : 'opacity-0'
+        )}
         style={endStyle}
       />
     </div>
@@ -90,4 +117,3 @@ export const KunScrollShadow: Component<KunScrollShadowProps> = (props) => {
 }
 
 export default KunScrollShadow
-

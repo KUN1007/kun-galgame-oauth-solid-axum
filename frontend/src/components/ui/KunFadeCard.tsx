@@ -15,4 +15,3 @@ export const KunFadeCard: Component<{ children?: any }> = (props) => {
 }
 
 export default KunFadeCard
-

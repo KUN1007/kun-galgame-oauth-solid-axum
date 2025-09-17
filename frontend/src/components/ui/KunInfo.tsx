@@ -11,4 +11,3 @@ export const KunInfo: Component<KunInfoProps> = (props) => {
 }
 
 export default KunInfo
-

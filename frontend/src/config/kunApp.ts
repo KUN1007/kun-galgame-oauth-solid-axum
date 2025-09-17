@@ -24,7 +24,7 @@ const KUN_SITE_LIST = [
   { name: '鲲 Galgame OAuth 系统', url: KUN_SITE_OAUTH },
   { name: '鲲 Galgame 表情包', url: KUN_SITE_STICKER },
   { name: '鲲 Galgame 论坛 (备用)', url: KUN_SITE_URL_BACKUP },
-  { name: '鲲 Galgame 开发文档', url: KUN_SITE_DEVELOPMENT_DOCUMENTATION },
+  { name: '鲲 Galgame 开发文档', url: KUN_SITE_DEVELOPMENT_DOCUMENTATION }
 ]
 const KUN_SITE_THEME_COLOR = '#006FEE'
 const KUN_SITE_VALID_DOMAIN_LIST = ['www.kungal.com', 'www.kungal.org']
@@ -46,17 +46,17 @@ export const kunOauth: KunSiteConfig = {
   author: [
     { name: KUN_SITE_TITLE, url: KUN_SITE_URL },
     { name: 'GitHub', url: KUN_SITE_GITHUB },
-    ...KUN_SITE_LIST,
+    ...KUN_SITE_LIST
   ],
   creator: {
     name: KUN_SITE_SHORT,
     mention: KUN_SITE_MENTION,
-    url: KUN_SITE_URL,
+    url: KUN_SITE_URL
   },
   publisher: {
     name: KUN_SITE_SHORT,
     mention: KUN_SITE_MENTION,
-    url: KUN_SITE_URL,
+    url: KUN_SITE_URL
   },
   domain: {
     main: KUN_SITE_URL,
@@ -68,13 +68,13 @@ export const kunOauth: KunSiteConfig = {
     oauth: KUN_SITE_OAUTH,
     sticker: KUN_SITE_STICKER,
     nav: KUN_SITE_NAV,
-    doc: KUN_SITE_DEVELOPMENT_DOCUMENTATION,
+    doc: KUN_SITE_DEVELOPMENT_DOCUMENTATION
   },
   og: {
     title: KUN_SITE_TITLE,
     description: KUN_SITE_DESCRIPTION,
     image: '/kungalgame.webp',
-    url: KUN_SITE_URL,
+    url: KUN_SITE_URL
   },
   images: [
     {
@@ -82,7 +82,7 @@ export const kunOauth: KunSiteConfig = {
       fullUrl: `${KUN_SITE_URL}/kungalgame.webp`,
       width: 1000,
       height: 800,
-      alt: KUN_SITE_TITLE,
-    },
-  ],
+      alt: KUN_SITE_TITLE
+    }
+  ]
 }

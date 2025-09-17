@@ -21,7 +21,7 @@ export const useRipple = () => {
       key: Date.now(),
       size,
       x: event.clientX - rect.left - size / 2,
-      y: event.clientY - rect.top - size / 2,
+      y: event.clientY - rect.top - size / 2
     }
 
     setRipples((prevRipples) => [...prevRipples, newRipple])
@@ -42,6 +42,6 @@ export const useRipple = () => {
 
   return {
     ripples,
-    createRipple,
+    createRipple
   }
 }

@@ -5,7 +5,7 @@ import { useKunMessage } from '~/components/ui/message/useMessage'
 
 export const KunHome = () => {
   return (
-    <div class="h-screen grid place-items-center">
+    <div class="grid h-screen place-items-center">
       <KunButton
         variant="flat"
         color="danger"

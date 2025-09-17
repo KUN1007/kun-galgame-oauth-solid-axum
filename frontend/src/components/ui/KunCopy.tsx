@@ -45,4 +45,3 @@ export const KunCopy: Component<KunCopyProps> = (props) => {
 }
 
 export default KunCopy
-

@@ -31,11 +31,10 @@ export const KunSlider: Component<KunSliderProps> = (props) => {
         step={step}
         value={val()}
         onInput={handleInput}
-        class="w-full accent-primary"
+        class="accent-primary w-full"
       />
     </div>
   )
 }
 
 export default KunSlider
-

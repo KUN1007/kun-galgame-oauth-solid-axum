@@ -23,5 +23,14 @@
     "sqlx",
     "thiserror",
     "VNDB"
-  ]
+  ],
+  "editor.codeActionsOnSave": {
+    "source.fixAll": "always"
+  },
+  "eslint.useFlatConfig": true,
+  "editor.formatOnSave": true,
+  "css.customData": [".vscode/tailwind.json"],
+  "[prisma]": {
+    "editor.defaultFormatter": "Prisma.prisma"
+  }
 }

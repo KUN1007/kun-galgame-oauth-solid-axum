@@ -6,7 +6,7 @@ import {
   onCleanup,
   onMount,
   Show,
-  untrack,
+  untrack
 } from 'solid-js'
 import { Icon } from '@iconify-icon/solid'
 import { cn } from '~/utils/cn'
@@ -84,7 +84,7 @@ export const MessageItem: Component<MessageItemProps> = (props) => {
           text: 'text-success-800',
           icon: 'text-success-500',
           progress: 'bg-success-400',
-          iconName: 'lucide:check-circle-2',
+          iconName: 'lucide:check-circle-2'
         }
 
       case 'error':
@@ -93,7 +93,7 @@ export const MessageItem: Component<MessageItemProps> = (props) => {
           text: 'text-danger-800',
           icon: 'text-danger-500',
           progress: 'bg-danger-400',
-          iconName: 'lucide:x-circle',
+          iconName: 'lucide:x-circle'
         }
       case 'warn':
         return {
@@ -101,7 +101,7 @@ export const MessageItem: Component<MessageItemProps> = (props) => {
           text: 'text-warning-800',
           icon: 'text-warning-500',
           progress: 'bg-warning-400',
-          iconName: 'lucide:alert-triangle',
+          iconName: 'lucide:alert-triangle'
         }
       case 'info':
       default:
@@ -110,7 +110,7 @@ export const MessageItem: Component<MessageItemProps> = (props) => {
           text: 'text-primary-800',
           icon: 'text-primary-500',
           progress: 'bg-primary-400',
-          iconName: 'lucide:info',
+          iconName: 'lucide:info'
         }
     }
   })
@@ -127,7 +127,7 @@ export const MessageItem: Component<MessageItemProps> = (props) => {
       onMouseLeave={resumeTimer}
     >
       <Icon
-        class={cn('mr-3 h-6 w-6 flex flex-shrink-0', typeStyles().icon)}
+        class={cn('mr-3 flex h-6 w-6 flex-shrink-0', typeStyles().icon)}
         icon={typeStyles().iconName}
       />
 
@@ -154,7 +154,7 @@ export const MessageItem: Component<MessageItemProps> = (props) => {
             class="progress-bar absolute bottom-0 left-0 h-1"
             classList={{ [typeStyles().progress]: true }}
             style={{
-              'animation-duration': `${props.messageData.duration}ms`,
+              'animation-duration': `${props.messageData.duration}ms`
             }}
           />
         )

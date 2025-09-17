@@ -9,7 +9,12 @@ export interface KunImageProps extends Record<string, any> {
 }
 
 export const KunImage: Component<KunImageProps> = (allProps) => {
-  const [props, others] = splitProps(allProps, ['src', 'alt', 'class', 'custom'])
+  const [props, others] = splitProps(allProps, [
+    'src',
+    'alt',
+    'class',
+    'custom'
+  ])
   return (
     <img
       src={props.src}
@@ -22,4 +27,3 @@ export const KunImage: Component<KunImageProps> = (allProps) => {
 }
 
 export default KunImage
-

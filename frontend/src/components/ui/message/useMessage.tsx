@@ -29,7 +29,7 @@ export const createMessageState = () => ({
   messages,
   removeMessage: (id: string) => {
     setMessages((msgs) => msgs.filter((msg) => msg.id !== id))
-  },
+  }
 })
 
 const initializeContainer = () => {
@@ -70,7 +70,7 @@ export const useKunMessage = (
       duration,
       richText,
       position,
-      count: 1,
+      count: 1
     }
 
     if (position.startsWith('top')) {

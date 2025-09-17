@@ -17,14 +17,17 @@ export interface KunLinkProps extends Record<string, any> {
   suffix?: any
 }
 
-const colorClasses: Record<Exclude<KunLinkProps['color'], undefined>, string> = {
+const colorClasses: Record<
+  Exclude<KunLinkProps['color'], undefined>,
+  string
+> = {
   default: 'text-foreground',
   foreground: 'text-foreground',
   primary: 'text-primary',
   secondary: 'text-secondary',
   success: 'text-success',
   warning: 'text-warning',
-  danger: 'text-danger',
+  danger: 'text-danger'
 }
 
 const sizeClasses: Record<KunUISize, string> = {
@@ -32,13 +35,13 @@ const sizeClasses: Record<KunUISize, string> = {
   sm: 'text-sm',
   md: 'text-base',
   lg: 'text-lg',
-  xl: 'text-xl',
+  xl: 'text-xl'
 }
 
 const underlineMap = {
   none: '',
   hover: 'hover:underline underline-offset-3',
-  always: 'underline underline-offset-3',
+  always: 'underline underline-offset-3'
 } as const
 
 export const KunLink: Component<KunLinkProps> = (allProps) => {
@@ -53,16 +56,16 @@ export const KunLink: Component<KunLinkProps> = (allProps) => {
     'isShowAnchorIcon',
     'prefix',
     'suffix',
-    'children',
+    'children'
   ])
 
   const useRouter = !!props.to && props.to.startsWith('/')
   const className = cn(
     'inline-flex flex-wrap items-center gap-2 break-all',
-    underlineMap[(props.underline ?? 'always')],
+    underlineMap[props.underline ?? 'always'],
     sizeClasses[props.size ?? 'md'],
-    colorClasses[(props.color ?? 'primary')],
-    props.class,
+    colorClasses[props.color ?? 'primary'],
+    props.class
   )
 
   const content = (
@@ -76,17 +79,28 @@ export const KunLink: Component<KunLinkProps> = (allProps) => {
 
   if (useRouter) {
     return (
-      <A href={props.to!} class={className} rel={props.rel} target={props.target} {...others}>
+      <A
+        href={props.to!}
+        class={className}
+        rel={props.rel}
+        target={props.target}
+        {...others}
+      >
         {content}
       </A>
     )
   }
   return (
-    <a href={props.to} class={className} rel={props.rel} target={props.target} {...others}>
+    <a
+      href={props.to}
+      class={className}
+      rel={props.rel}
+      target={props.target}
+      {...others}
+    >
       {content}
     </a>
   )
 }
 
 export default KunLink
-

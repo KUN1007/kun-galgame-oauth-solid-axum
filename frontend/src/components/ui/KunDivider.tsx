@@ -16,7 +16,7 @@ const colorClasses: Record<KunUIColor, string> = {
   secondary: 'border-secondary/20',
   success: 'border-success/20',
   warning: 'border-warning/20',
-  danger: 'border-danger/20',
+  danger: 'border-danger/20'
 }
 
 export const KunDivider: Component<KunDividerProps> = (props) => {
@@ -31,7 +31,7 @@ export const KunDivider: Component<KunDividerProps> = (props) => {
       class={cn(
         'flex items-center',
         orientation === 'horizontal' ? 'w-full' : 'h-full flex-col',
-        props.class,
+        props.class
       )}
       role="separator"
     >
@@ -39,14 +39,14 @@ export const KunDivider: Component<KunDividerProps> = (props) => {
         class={cn(
           orientation === 'horizontal' ? 'w-full border-t' : 'h-full border-l',
           borderStyle === 'dashed' ? 'border-dashed' : 'border-solid',
-          colorClasses[color],
+          colorClasses[color]
         )}
       />
       {hasLabel && (
         <div
           class={cn(
             'text-default-500 text-sm',
-            orientation === 'horizontal' ? 'px-4 whitespace-nowrap' : 'py-4',
+            orientation === 'horizontal' ? 'px-4 whitespace-nowrap' : 'py-4'
           )}
         >
           {props.children}
@@ -55,9 +55,11 @@ export const KunDivider: Component<KunDividerProps> = (props) => {
       {hasLabel && (
         <div
           class={cn(
-            orientation === 'horizontal' ? 'w-full border-t' : 'h-full border-l',
+            orientation === 'horizontal'
+              ? 'w-full border-t'
+              : 'h-full border-l',
             borderStyle === 'dashed' ? 'border-dashed' : 'border-solid',
-            colorClasses[color],
+            colorClasses[color]
           )}
         />
       )}
@@ -66,4 +68,3 @@ export const KunDivider: Component<KunDividerProps> = (props) => {
 }
 
 export default KunDivider
-

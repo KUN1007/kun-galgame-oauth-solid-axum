@@ -6,7 +6,8 @@ export interface KunSelectOption {
   label: string
 }
 
-export interface KunSelectProps extends Omit<JSX.SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
+export interface KunSelectProps
+  extends Omit<JSX.SelectHTMLAttributes<HTMLSelectElement>, 'onChange'> {
   modelValue?: string | number
   options: KunSelectOption[]
   placeholder?: string
@@ -31,7 +32,7 @@ export const KunSelect: Component<KunSelectProps> = (allProps) => {
     'error',
     'darkBorder',
     'ariaLabel',
-    'onChange',
+    'onChange'
   ])
 
   const id = uniqueId('kun-select')
@@ -55,15 +56,20 @@ export const KunSelect: Component<KunSelectProps> = (allProps) => {
         aria-label={props.ariaLabel || 'select'}
         class={cn(
           'focus:border-primary-500 focus:ring-primary-500 w-full cursor-pointer rounded-lg border px-3 py-2 text-left shadow focus:ring-1 focus:outline-none sm:text-sm',
-          props.darkBorder !== false && 'dark:border-default-200 border border-transparent',
-          props.disabled && 'bg-default-100 cursor-not-allowed',
+          props.darkBorder !== false &&
+            'dark:border-default-200 border border-transparent',
+          props.disabled && 'bg-default-100 cursor-not-allowed'
         )}
         disabled={props.disabled}
         value={props.modelValue as any}
         onChange={handleChange}
         {...others}
       >
-        {props.placeholder && <option value="" disabled selected={props.modelValue == null}>{props.placeholder}</option>}
+        {props.placeholder && (
+          <option value="" disabled selected={props.modelValue == null}>
+            {props.placeholder}
+          </option>
+        )}
         {props.options.map((opt) => (
           <option value={opt.value as any}>{opt.label}</option>
         ))}

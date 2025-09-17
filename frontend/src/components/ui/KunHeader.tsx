@@ -16,7 +16,7 @@ export const KunHeader: Component<KunHeaderProps> = (props) => {
     const scaleClasses = {
       h1: 'text-2xl sm:text-3xl',
       h2: 'text-xl sm:text-2xl',
-      h3: 'text-lg sm:text-xl',
+      h3: 'text-lg sm:text-xl'
     }
     return cn('font-medium', scaleClasses[props.scale ?? 'h1'])
   }
@@ -47,4 +47,3 @@ export const KunHeader: Component<KunHeaderProps> = (props) => {
 }
 
 export default KunHeader
-

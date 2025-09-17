@@ -1,10 +1,17 @@
-import { type Component, type JSX, createSignal, splitProps, onMount } from 'solid-js'
+import {
+  type Component,
+  type JSX,
+  createSignal,
+  splitProps,
+  onMount
+} from 'solid-js'
 import { cn } from '~/utils/cn'
 
 let textareaSeed = 0
 const uniqueId = (prefix: string) => `${prefix}-${++textareaSeed}`
 
-export interface KunTextareaProps extends Omit<JSX.TextareaHTMLAttributes<HTMLTextAreaElement>, 'onInput'> {
+export interface KunTextareaProps
+  extends Omit<JSX.TextareaHTMLAttributes<HTMLTextAreaElement>, 'onInput'> {
   placeholder?: string
   modelValue?: string
   label?: string
@@ -44,7 +51,7 @@ export const KunTextarea: Component<KunTextareaProps> = (allProps) => {
     'maxlength',
     'minlength',
     'resize',
-    'darkBorder',
+    'darkBorder'
   ])
 
   const id = uniqueId('kun-textarea')
@@ -61,7 +68,9 @@ export const KunTextarea: Component<KunTextareaProps> = (allProps) => {
     textareaRef.style.height = newHeight
   }
 
-  const handleInput = (e: InputEvent & { currentTarget: HTMLTextAreaElement }) => {
+  const handleInput = (
+    e: InputEvent & { currentTarget: HTMLTextAreaElement }
+  ) => {
     setLocalValue(e.currentTarget.value)
     if (props.autoGrow) adjustHeight()
   }
@@ -104,7 +113,7 @@ export const KunTextarea: Component<KunTextareaProps> = (allProps) => {
                 ? 'resize-y'
                 : props.resize === 'horizontal'
                   ? 'resize-x'
-                  : 'resize',
+                  : 'resize'
           )}
           onInput={handleInput}
           {...others}
@@ -120,7 +129,9 @@ export const KunTextarea: Component<KunTextareaProps> = (allProps) => {
       {props.error ? (
         <div class="text-danger-600 mt-1 text-sm">{props.error}</div>
       ) : (
-        props.hint && <div class="text-default-500 mt-1 text-sm">{props.hint}</div>
+        props.hint && (
+          <div class="text-default-500 mt-1 text-sm">{props.hint}</div>
+        )
       )}
     </div>
   )

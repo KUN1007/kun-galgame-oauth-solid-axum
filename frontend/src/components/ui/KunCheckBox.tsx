@@ -27,7 +27,7 @@ const colorClasses: Record<KunUIColor, string> = {
   warning:
     'border-warning-300 checked:bg-warning checked:border-warning hover:border-warning',
   danger:
-    'border-danger-300 checked:bg-danger checked:border-danger hover:border-danger',
+    'border-danger-300 checked:bg-danger checked:border-danger hover:border-danger'
 }
 
 export const KunCheckBox: Component<KunCheckBoxProps> = (allProps) => {
@@ -40,7 +40,7 @@ export const KunCheckBox: Component<KunCheckBoxProps> = (allProps) => {
     'name',
     'value',
     'disabled',
-    'class',
+    'class'
   ])
 
   return (
@@ -56,7 +56,7 @@ export const KunCheckBox: Component<KunCheckBoxProps> = (allProps) => {
           class={cn(
             'peer h-5 w-5 appearance-none border-2 text-white transition-all disabled:cursor-not-allowed disabled:opacity-50',
             props.type === 'single' ? 'rounded-full' : 'rounded',
-            colorClasses[props.color ?? 'default'],
+            colorClasses[props.color ?? 'default']
           )}
         />
         <div class="pointer-events-none absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-white opacity-0 transition-opacity duration-200 peer-checked:opacity-100">
@@ -68,7 +68,7 @@ export const KunCheckBox: Component<KunCheckBoxProps> = (allProps) => {
           for={props.id}
           class={cn(
             'text-default-700 ml-2 cursor-pointer text-sm select-none',
-            props.disabled && 'cursor-not-allowed opacity-50',
+            props.disabled && 'cursor-not-allowed opacity-50'
           )}
         >
           {props.label}
@@ -79,4 +79,3 @@ export const KunCheckBox: Component<KunCheckBoxProps> = (allProps) => {
 }
 
 export default KunCheckBox
-

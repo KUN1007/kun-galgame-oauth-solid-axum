@@ -16,11 +16,24 @@ export const KunLightbox: Component<KunLightboxProps> = (props) => {
       {props.children ? (
         <div onClick={() => setOpen(true)}>{props.children}</div>
       ) : (
-        <KunImage class={props.thumbClass} src={props.src} alt={props.alt} onClick={() => setOpen(true)} />
+        <KunImage
+          class={props.thumbClass}
+          src={props.src}
+          alt={props.alt}
+          onClick={() => setOpen(true)}
+        />
       )}
-      <KunModal modalValue={open()} onUpdateModalValue={setOpen} withContainer={false}>
+      <KunModal
+        modalValue={open()}
+        onUpdateModalValue={setOpen}
+        withContainer={false}
+      >
         <div class="max-h-[90vh] max-w-[90vw]">
-          <img src={props.src} alt={props.alt} class="max-h-[90vh] max-w-[90vw] object-contain" />
+          <img
+            src={props.src}
+            alt={props.alt}
+            class="max-h-[90vh] max-w-[90vw] object-contain"
+          />
         </div>
       </KunModal>
     </>
@@ -28,4 +41,3 @@ export const KunLightbox: Component<KunLightboxProps> = (props) => {
 }
 
 export default KunLightbox
-

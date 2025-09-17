@@ -38,7 +38,7 @@ export const KunModal: Component<KunModalProps> = (allProps) => {
     'withContainer',
     'onUpdateModalValue',
     'onClose',
-    'children',
+    'children'
   ])
 
   const isDismissable = props.isDismissable ?? true

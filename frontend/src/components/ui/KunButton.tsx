@@ -3,7 +3,7 @@ import {
   splitProps,
   Show,
   type JSX,
-  type ParentComponent,
+  type ParentComponent
 } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { cn } from '~/utils/cn'
@@ -44,7 +44,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
     fullWidth: false,
     isIconOnly: false,
     iconPosition: 'left',
-    target: '_self',
+    target: '_self'
   })
 
   const [local, others] = splitProps(merged, [
@@ -62,7 +62,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
     'href',
     'target',
     'children',
-    'onClick',
+    'onClick'
   ])
 
   const { ripples, createRipple } = useRipple()
@@ -114,7 +114,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
       secondary: 'bg-secondary',
       success: 'bg-success',
       warning: 'bg-warning',
-      danger: 'bg-danger',
+      danger: 'bg-danger'
     },
     bordered: {
       default: 'bg-transparent border-default',
@@ -122,7 +122,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
       secondary: 'bg-transparent border-secondary text-secondary',
       success: 'bg-transparent border-success text-success',
       warning: 'bg-transparent border-warning text-warning',
-      danger: 'bg-transparent border-danger text-danger',
+      danger: 'bg-transparent border-danger text-danger'
     },
     light: {
       default: 'bg-transparent hover:bg-default/40',
@@ -130,7 +130,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
       secondary: 'bg-transparent text-secondary hover:bg-secondary/20',
       success: 'bg-transparent text-success hover:bg-success/20',
       warning: 'bg-transparent text-warning hover:bg-warning/20',
-      danger: 'bg-transparent text-danger hover:bg-danger/20',
+      danger: 'bg-transparent text-danger hover:bg-danger/20'
     },
     flat: {
       default: 'bg-default/40 text-default-700',
@@ -138,7 +138,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
       secondary: 'bg-secondary/20 text-secondary-600',
       success: 'bg-success/20 text-success-700 dark:text-success',
       warning: 'bg-warning/20 text-warning-700 dark:text-warning',
-      danger: 'bg-danger/20 text-danger-600 dark:text-danger-500',
+      danger: 'bg-danger/20 text-danger-600 dark:text-danger-500'
     },
     faded: {
       default: 'border-default bg-default-100',
@@ -146,7 +146,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
       secondary: 'border-default bg-secondary-100 text-secondary',
       success: 'border-default bg-success-100 text-success',
       warning: 'border-default bg-warning-100 text-warning',
-      danger: 'border-default bg-danger-100 text-danger',
+      danger: 'border-default bg-danger-100 text-danger'
     },
     shadow: {
       default: 'shadow-lg shadow-default/50 bg-default',
@@ -154,7 +154,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
       secondary: 'shadow-lg shadow-secondary/40 bg-secondary',
       success: 'shadow-lg shadow-success/40 bg-success',
       warning: 'shadow-lg shadow-warning/40 bg-warning',
-      danger: 'shadow-lg shadow-danger/40 bg-danger',
+      danger: 'shadow-lg shadow-danger/40 bg-danger'
     },
     ghost: {
       default: 'border-default',
@@ -162,8 +162,8 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
       secondary: 'border-secondary text-secondary',
       success: 'border-success text-success',
       warning: 'border-warning text-warning',
-      danger: 'border-danger text-danger',
-    },
+      danger: 'border-danger text-danger'
+    }
   }
 
   const variantClasses = createMemo(() => {

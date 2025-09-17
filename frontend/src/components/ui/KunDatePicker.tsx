@@ -4,9 +4,13 @@ import { cn } from '~/utils/cn'
 import { KunButton } from './KunButton'
 import { KunIcon } from './KunIcon'
 
-export const KunDatePicker: Component<KunDatePickerProps & {
-  onUpdateModelValue?: (value: string | null | [string | null, string | null]) => void
-}> = (allProps) => {
+export const KunDatePicker: Component<
+  KunDatePickerProps & {
+    onUpdateModelValue?: (
+      value: string | null | [string | null, string | null]
+    ) => void
+  }
+> = (allProps) => {
   const [props, others] = splitProps(allProps, [
     'modelValue',
     'mode',
@@ -16,17 +20,24 @@ export const KunDatePicker: Component<KunDatePickerProps & {
     'disabled',
     'darkBorder',
     'clearable',
-    'onUpdateModelValue',
+    'onUpdateModelValue'
   ])
 
   const mode: KunDatePickerMode = props.mode ?? 'single'
-  const [value, setValue] = createSignal<string | null | [string | null, string | null]>(
-    props.modelValue ?? (mode === 'single' ? null : ([null, null] as [string | null, string | null]))
+  const [value, setValue] = createSignal<
+    string | null | [string | null, string | null]
+  >(
+    props.modelValue ??
+      (mode === 'single'
+        ? null
+        : ([null, null] as [string | null, string | null]))
   )
 
   const clear = () => {
     const v: string | null | [string | null, string | null] =
-      mode === 'single' ? null : ([null, null] as [string | null, string | null])
+      mode === 'single'
+        ? null
+        : ([null, null] as [string | null, string | null])
     setValue(v)
     props.onUpdateModelValue?.(v)
   }
@@ -39,7 +50,9 @@ export const KunDatePicker: Component<KunDatePickerProps & {
 
   return (
     <div class="relative w-full" {...others}>
-      {props.label && <label class="mb-2 block text-sm font-medium">{props.label}</label>}
+      {props.label && (
+        <label class="mb-2 block text-sm font-medium">{props.label}</label>
+      )}
       <div class="relative">
         <button
           type="button"
@@ -47,11 +60,14 @@ export const KunDatePicker: Component<KunDatePickerProps & {
           class={cn(
             'flex w-full cursor-pointer items-center justify-between rounded-lg px-3 py-2 text-left shadow focus:ring-1 focus:outline-none sm:text-sm',
             'focus:border-primary-500 focus:ring-primary-500',
-            props.darkBorder !== false && 'dark:border-default-200 border border-transparent',
-            props.disabled && 'bg-default-100 cursor-not-allowed',
+            props.darkBorder !== false &&
+              'dark:border-default-200 border border-transparent',
+            props.disabled && 'bg-default-100 cursor-not-allowed'
           )}
         >
-          <span class={cn('block truncate', !displayValue() && 'text-default-400')}>
+          <span
+            class={cn('block truncate', !displayValue() && 'text-default-400')}
+          >
             {displayValue() || props.placeholder}
           </span>
           <div class="flex items-center">
@@ -75,39 +91,42 @@ export const KunDatePicker: Component<KunDatePickerProps & {
       </div>
 
       <div class="mt-2 flex gap-2">
-        <Show when={mode === 'single'} fallback={
-          <>
-            <input
-              type="date"
-              class="border-default/20 rounded-md border px-2 py-1 text-sm dark:border-default-200"
-              value={(value() as [string | null, string | null])[0] ?? ''}
-              onInput={(e) => {
-                const v: [string | null, string | null] = [
-                  (e.target as HTMLInputElement).value || null,
-                  (value() as [string | null, string | null])[1],
-                ]
-                setValue(v)
-                props.onUpdateModelValue?.(v)
-              }}
-            />
-            <input
-              type="date"
-              class="border-default/20 rounded-md border px-2 py-1 text-sm dark:border-default-200"
-              value={(value() as [string | null, string | null])[1] ?? ''}
-              onInput={(e) => {
-                const v: [string | null, string | null] = [
-                  (value() as [string | null, string | null])[0],
-                  (e.target as HTMLInputElement).value || null,
-                ]
-                setValue(v)
-                props.onUpdateModelValue?.(v)
-              }}
-            />
-          </>
-        }>
+        <Show
+          when={mode === 'single'}
+          fallback={
+            <>
+              <input
+                type="date"
+                class="border-default/20 dark:border-default-200 rounded-md border px-2 py-1 text-sm"
+                value={(value() as [string | null, string | null])[0] ?? ''}
+                onInput={(e) => {
+                  const v: [string | null, string | null] = [
+                    (e.target as HTMLInputElement).value || null,
+                    (value() as [string | null, string | null])[1]
+                  ]
+                  setValue(v)
+                  props.onUpdateModelValue?.(v)
+                }}
+              />
+              <input
+                type="date"
+                class="border-default/20 dark:border-default-200 rounded-md border px-2 py-1 text-sm"
+                value={(value() as [string | null, string | null])[1] ?? ''}
+                onInput={(e) => {
+                  const v: [string | null, string | null] = [
+                    (value() as [string | null, string | null])[0],
+                    (e.target as HTMLInputElement).value || null
+                  ]
+                  setValue(v)
+                  props.onUpdateModelValue?.(v)
+                }}
+              />
+            </>
+          }
+        >
           <input
             type="date"
-            class="border-default/20 rounded-md border px-2 py-1 text-sm dark:border-default-200"
+            class="border-default/20 dark:border-default-200 rounded-md border px-2 py-1 text-sm"
             value={(value() as string | null) ?? ''}
             onInput={(e) => {
               const v = (e.target as HTMLInputElement).value || null
@@ -124,4 +143,3 @@ export const KunDatePicker: Component<KunDatePickerProps & {
 }
 
 export default KunDatePicker
-

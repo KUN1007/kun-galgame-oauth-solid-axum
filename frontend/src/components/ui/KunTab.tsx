@@ -11,7 +11,13 @@ export interface KunTabItem {
 }
 
 export type KunTabVariant = 'solid' | 'underlined'
-export type KunTabColor = 'primary' | 'secondary' | 'success' | 'warning' | 'danger' | 'default'
+export type KunTabColor =
+  | 'primary'
+  | 'secondary'
+  | 'success'
+  | 'warning'
+  | 'danger'
+  | 'default'
 export type KunTabSize = 'sm' | 'md' | 'lg'
 
 export interface KunTabProps {
@@ -38,15 +44,17 @@ export const KunTab: Component<KunTabProps> = (props) => {
     props.fullWidth && 'w-full',
     props.disabled && 'opacity-50 cursor-not-allowed',
     !props.hasScrollbar && 'scrollbar-hide',
-    props.class,
+    props.class
   )
 
   const tabListClasses = cn(
     'flex h-fit items-center gap-2',
-    (props.variant ?? 'solid') === 'solid' && 'border border-default-200 rounded-lg p-1',
-    (props.variant ?? 'solid') === 'underlined' && 'border-b border-default-200',
+    (props.variant ?? 'solid') === 'solid' &&
+      'border border-default-200 rounded-lg p-1',
+    (props.variant ?? 'solid') === 'underlined' &&
+      'border-b border-default-200',
     props.fullWidth && 'w-full',
-    props.innerClass,
+    props.innerClass
   )
 
   const itemClasses = (item: KunTabItem) => {
@@ -59,22 +67,25 @@ export const KunTab: Component<KunTabProps> = (props) => {
         'rounded-lg px-3 py-2',
         isSelected ? `bg-${color} text-white` : `hover:text-${color}`,
         item.disabled && 'opacity-50 cursor-not-allowed',
-        !props.disableAnimation && 'transition-colors',
+        !props.disableAnimation && 'transition-colors'
       )
     }
     return cn(
       base,
       'px-4 py-2 relative',
       isSelected && `text-${color} border-b-2 border-${color}`,
-      isSelected && 'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5',
+      isSelected &&
+        'after:absolute after:bottom-0 after:left-0 after:right-0 after:h-0.5',
       isSelected && `after:bg-${color}`,
       !isSelected && 'hover:text-default-900',
       item.disabled && 'opacity-50 cursor-not-allowed',
-      !props.disableAnimation && 'after:transition-all',
+      !props.disableAnimation && 'after:transition-all'
     )
   }
 
-  const sizeClass = ({ sm: 'text-sm', md: '', lg: 'text-lg' } as const)[props.size ?? 'md']
+  const sizeClass = ({ sm: 'text-sm', md: '', lg: 'text-lg' } as const)[
+    props.size ?? 'md'
+  ]
 
   const handleClick = (item: KunTabItem) => {
     if (props.disabled || item.disabled) return
@@ -94,17 +105,21 @@ export const KunTab: Component<KunTabProps> = (props) => {
               role="tab"
               aria-selected={props.modelValue === item.value}
               aria-disabled={item.disabled || props.disabled}
-              tabindex={(item.disabled || props.disabled) ? -1 : 0}
+              tabindex={item.disabled || props.disabled ? -1 : 0}
               onClick={[handleClick, item]}
-              onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && handleClick(item)}
+              onKeyDown={(e) =>
+                (e.key === 'Enter' || e.key === ' ') && handleClick(item)
+              }
               class="flex items-center gap-2"
             >
               {item.icon && (
                 <KunIcon
                   name={item.icon}
                   class={cn(
-                    props.modelValue === item.value ? `text-${props.color ?? 'primary'}` : 'text-default-500',
-                    'transition-colors',
+                    props.modelValue === item.value
+                      ? `text-${props.color ?? 'primary'}`
+                      : 'text-default-500',
+                    'transition-colors'
                   )}
                 />
               )}
@@ -122,4 +137,3 @@ export const KunTab: Component<KunTabProps> = (props) => {
 }
 
 export default KunTab
-

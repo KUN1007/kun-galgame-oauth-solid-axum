@@ -56,7 +56,7 @@ export const KunAvatar: Component<KunAvatarProps> = (props) => {
       class={cn(
         'flex shrink-0 cursor-pointer justify-center rounded-full transition duration-150 ease-in-out hover:scale-110',
         sizeClasses(),
-        props.class,
+        props.class
       )}
       onClick={handleClick}
       role="img"
@@ -73,7 +73,7 @@ export const KunAvatar: Component<KunAvatarProps> = (props) => {
         <span
           class={cn(
             'bg-default flex shrink-0 items-center justify-center rounded-full text-white',
-            sizeClasses(),
+            sizeClasses()
           )}
         >
           {props.user.name.slice(0, 1).toUpperCase()}
@@ -84,4 +84,3 @@ export const KunAvatar: Component<KunAvatarProps> = (props) => {
 }
 
 export default KunAvatar
-

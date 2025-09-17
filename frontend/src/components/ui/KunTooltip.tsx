@@ -55,7 +55,7 @@ export const KunTooltip: Component<KunTooltipProps> = (props) => {
         <div
           class={cn(
             'absolute z-50 hidden rounded-lg border bg-white px-3 py-2 text-sm font-medium whitespace-nowrap shadow sm:block dark:bg-black',
-            positionClasses(),
+            positionClasses()
           )}
           role="tooltip"
         >
@@ -63,7 +63,7 @@ export const KunTooltip: Component<KunTooltipProps> = (props) => {
           <div
             class={cn(
               'absolute h-2 w-2 rotate-45 transform bg-white dark:bg-black',
-              arrowPositionClasses(),
+              arrowPositionClasses()
             )}
           />
         </div>
@@ -73,4 +73,3 @@ export const KunTooltip: Component<KunTooltipProps> = (props) => {
 }
 
 export default KunTooltip
-

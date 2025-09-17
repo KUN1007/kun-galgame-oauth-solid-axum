@@ -11,14 +11,14 @@ export default defineConfig({
     proxy: {
       '/api': {
         target: 'http://127.0.0.1:1314',
-        changeOrigin: true,
-      },
-    },
+        changeOrigin: true
+      }
+    }
   },
   resolve: {
     alias: {
       '@': path.resolve(__dirname, '.'),
-      '~': path.resolve(__dirname, './src'),
-    },
-  },
+      '~': path.resolve(__dirname, './src')
+    }
+  }
 })

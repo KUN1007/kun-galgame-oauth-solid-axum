@@ -1,6 +1,8 @@
 import { type Component, splitProps } from 'solid-js'
 
-export const Markdown: Component<{ class?: string } & Record<string, any>> = (allProps) => {
+export const Markdown: Component<{ class?: string } & Record<string, any>> = (
+  allProps
+) => {
   const [props, rest] = splitProps(allProps, ['class'])
   return (
     <svg
@@ -20,4 +22,3 @@ export const Markdown: Component<{ class?: string } & Record<string, any>> = (al
 }
 
 export default Markdown
-

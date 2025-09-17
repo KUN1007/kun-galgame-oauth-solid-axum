@@ -52,7 +52,9 @@ export const KunPopover: Component<KunPopoverProps> = (props) => {
       <div
         ref={(el) => (triggerRef = el)}
         onClick={() => setIsOpen((v) => !v)}
-        onKeyDown={(e) => (e.key === 'Enter' || e.key === ' ') && setIsOpen((v) => !v)}
+        onKeyDown={(e) =>
+          (e.key === 'Enter' || e.key === ' ') && setIsOpen((v) => !v)
+        }
         tabindex={0}
         role="button"
         aria-label="popover-trigger"
@@ -70,7 +72,7 @@ export const KunPopover: Component<KunPopoverProps> = (props) => {
           class={cn(
             'absolute z-50 mt-2 rounded-lg border bg-white shadow-lg dark:bg-black',
             positionClass(),
-            props.innerClass,
+            props.innerClass
           )}
           onClick={(e) => e.stopPropagation()}
         >
@@ -82,4 +84,3 @@ export const KunPopover: Component<KunPopoverProps> = (props) => {
 }
 
 export default KunPopover
-

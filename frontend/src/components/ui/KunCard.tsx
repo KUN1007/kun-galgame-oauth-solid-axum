@@ -3,7 +3,7 @@ import {
   type ParentComponent,
   createMemo,
   splitProps,
-  Show,
+  Show
 } from 'solid-js'
 import { Dynamic } from 'solid-js/web'
 import { useRipple } from './ripple/useRipple'
@@ -37,7 +37,7 @@ export const KunCard: ParentComponent<KunCardProps> = (props) => {
     href: '/',
     rounded: 'lg',
     color: 'background',
-    darkBorder: false,
+    darkBorder: false
   })
 
   const [local, others] = splitProps(merged, [
@@ -55,7 +55,7 @@ export const KunCard: ParentComponent<KunCardProps> = (props) => {
     'cover',
     'footer',
     'children',
-    'onClick',
+    'onClick'
   ])
 
   const { ripples, createRipple } = useRipple()
@@ -77,7 +77,7 @@ export const KunCard: ParentComponent<KunCardProps> = (props) => {
     secondary: 'bg-secondary-100/70 border-secondary-300',
     success: 'bg-success-100/70 border-success-300',
     warning: 'bg-warning-100/70 border-warning-300',
-    danger: 'bg-danger-100/70 border-danger-300',
+    danger: 'bg-danger-100/70 border-danger-300'
   }
 
   const roundedClasses = createMemo(() => {

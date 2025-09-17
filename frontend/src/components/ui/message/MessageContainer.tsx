@@ -3,7 +3,7 @@ import { TransitionGroup } from 'solid-transition-group'
 import {
   createMessageState,
   type MessageOptions,
-  type MessagePosition,
+  type MessagePosition
 } from './useMessage'
 import '../styles/kun-message.css'
 import { MessageItem } from './MessageItem'
@@ -18,7 +18,7 @@ export const MessageContainer: Component = () => {
       'top-right': [],
       'bottom-left': [],
       'bottom-center': [],
-      'bottom-right': [],
+      'bottom-right': []
     } as Record<MessagePosition, MessageOptions[]>
 
     for (const msg of messages) {
@@ -35,7 +35,7 @@ export const MessageContainer: Component = () => {
     'top-right': 'top-4 right-4 items-end',
     'bottom-center': 'bottom-4 left-1/2 -translate-x-1/2 items-center',
     'bottom-left': 'bottom-4 left-4 items-start',
-    'bottom-right': 'bottom-4 right-4 items-end',
+    'bottom-right': 'bottom-4 right-4 items-end'
   }
 
   return (
@@ -44,7 +44,7 @@ export const MessageContainer: Component = () => {
         <div
           class={[
             'pointer-events-none fixed z-[7777] flex w-full max-w-sm flex-col p-4',
-            positionClasses[position],
+            positionClasses[position]
           ].join(' ')}
         >
           <TransitionGroup

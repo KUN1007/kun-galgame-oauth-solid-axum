@@ -1,11 +1,19 @@
-import { type Component, type JSX, createSignal, createMemo, splitProps, onMount } from 'solid-js'
+import {
+  type Component,
+  type JSX,
+  createSignal,
+  createMemo,
+  splitProps,
+  onMount
+} from 'solid-js'
 import type { KunUIColor, KunUISize } from './type'
 import { cn } from '~/utils/cn'
 
 let inputSeed = 0
 const uniqueId = (prefix: string) => `${prefix}-${++inputSeed}`
 
-export interface KunInputProps extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'size' | 'color'> {
+export interface KunInputProps
+  extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'size' | 'color'> {
   modelValue?: string | number
   label?: string
   type?: string
@@ -39,7 +47,7 @@ export const KunInput: Component<KunInputProps> = (allProps) => {
     'darkBorder',
     'autofocus',
     'prefix',
-    'suffix',
+    'suffix'
   ])
 
   const id = uniqueId('kun-input')
@@ -51,7 +59,7 @@ export const KunInput: Component<KunInputProps> = (allProps) => {
     secondary: 'focus:ring-secondary',
     success: 'focus:ring-success',
     warning: 'focus:ring-warning',
-    danger: 'focus:ring-danger',
+    danger: 'focus:ring-danger'
   }
 
   const sizeClasses = createMemo(() => {
@@ -73,7 +81,9 @@ export const KunInput: Component<KunInputProps> = (allProps) => {
 
   let inputRef: HTMLInputElement | undefined
 
-  const handleInput = (event: InputEvent & { currentTarget: HTMLInputElement }) => {
+  const handleInput = (
+    event: InputEvent & { currentTarget: HTMLInputElement }
+  ) => {
     setValue(event.currentTarget.value)
   }
 
@@ -106,8 +116,10 @@ export const KunInput: Component<KunInputProps> = (allProps) => {
             !!props.prefix && 'pl-10',
             !!props.suffix && 'pr-10',
             props.disabled && 'bg-default-100 cursor-not-allowed',
-            props.error ? 'border-red-300 focus:border-red-500 focus:ring-red-500' : '',
-            props.class,
+            props.error
+              ? 'border-red-300 focus:border-red-500 focus:ring-red-500'
+              : '',
+            props.class
           )}
           onInput={handleInput}
           {...others}
@@ -118,7 +130,9 @@ export const KunInput: Component<KunInputProps> = (allProps) => {
           </div>
         )}
         {props.suffix && (
-          <div class="absolute inset-y-0 right-0 flex items-center pr-3">{props.suffix}</div>
+          <div class="absolute inset-y-0 right-0 flex items-center pr-3">
+            {props.suffix}
+          </div>
         )}
       </div>
       {props.helperText && !props.error && (

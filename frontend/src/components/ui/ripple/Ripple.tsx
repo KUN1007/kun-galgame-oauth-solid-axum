@@ -32,7 +32,7 @@ export const KunRipple: Component<{ ripples: RippleType[] }> = (props) => {
               width: `${ripple.size}px`,
               height: `${ripple.size}px`,
               top: `${ripple.y}px`,
-              left: `${ripple.x}px`,
+              left: `${ripple.x}px`
             }}
           />
         )}

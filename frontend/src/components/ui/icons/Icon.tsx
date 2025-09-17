@@ -12,4 +12,3 @@ export const Icon: Component<IconProps> = (props) => {
 }
 
 export default Icon
-
