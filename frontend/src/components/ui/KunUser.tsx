@@ -29,5 +29,3 @@ export const KunUserCard: Component<KunUserProps> = (props) => {
     </div>
   )
 }
-
-export default KunUserCard

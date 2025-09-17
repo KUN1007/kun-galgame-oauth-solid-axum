@@ -1,7 +1,7 @@
-import { type Component } from 'solid-js'
+import { type ParentComponent } from 'solid-js'
 import { Transition } from 'solid-transition-group'
 
-export const KunFadeCard: Component<{ children?: any }> = (props) => {
+export const KunFadeCard: ParentComponent = (props) => {
   return (
     <Transition
       enterActiveClass="transition-all duration-300 ease-out"
@@ -13,5 +13,3 @@ export const KunFadeCard: Component<{ children?: any }> = (props) => {
     </Transition>
   )
 }
-
-export default KunFadeCard

@@ -7,5 +7,3 @@ export const KunContent: Component<{
 }> = (props) => {
   return <div class={cn('kun-prose', props.class)}>{props.children}</div>
 }
-
-export default KunContent

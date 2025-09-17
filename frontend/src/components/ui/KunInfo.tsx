@@ -1,5 +1,5 @@
-import { type Component, type JSX } from 'solid-js'
 import { cn } from '~/utils/cn'
+import { type Component, type JSX } from 'solid-js'
 
 export interface KunInfoProps {
   class?: string
@@ -9,5 +9,3 @@ export interface KunInfoProps {
 export const KunInfo: Component<KunInfoProps> = (props) => {
   return <div class={cn('text-default-600', props.class)}>{props.children}</div>
 }
-
-export default KunInfo

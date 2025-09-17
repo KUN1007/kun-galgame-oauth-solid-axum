@@ -1,6 +1,6 @@
 import { type Component, type JSX } from 'solid-js'
 import { cn } from '~/utils/cn'
-import KunDivider from './KunDivider'
+import { KunDivider } from './KunDivider'
 
 export interface KunHeaderProps {
   name?: string
@@ -21,7 +21,7 @@ export const KunHeader: Component<KunHeaderProps> = (props) => {
     return cn('font-medium', scaleClasses[props.scale ?? 'h1'])
   }
 
-  const Tag = (props.scale ?? 'h1') as any
+  const Tag = props.scale ?? 'h1'
 
   return (
     <>
@@ -45,5 +45,3 @@ export const KunHeader: Component<KunHeaderProps> = (props) => {
     </>
   )
 }
-
-export default KunHeader

@@ -61,5 +61,3 @@ export const KunUpload: Component<KunUploadProps> = (allProps) => {
     />
   )
 }
-
-export default KunUpload

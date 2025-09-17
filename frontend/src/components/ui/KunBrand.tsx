@@ -1,7 +1,7 @@
 import { type Component } from 'solid-js'
-import KunLink from './KunLink'
-import KunBadge from './KunBadge'
-import KunImage from './KunImage'
+import { KunLink } from './KunLink'
+import { KunBadge } from './KunBadge'
+import { KunImage } from './KunImage'
 
 export interface KunBrandProps {
   title?: string
@@ -24,7 +24,7 @@ export const KunBrand: Component<KunBrandProps> = (props) => {
       />
       <span class="text-xl">{props.title ?? 'KUN'}</span>
       <KunBadge size="md" color="primary">
-        Beta
+        OAuth
       </KunBadge>
     </KunLink>
   )

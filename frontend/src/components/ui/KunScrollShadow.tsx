@@ -1,4 +1,9 @@
-import { type Component, createSignal, onCleanup, onMount } from 'solid-js'
+import {
+  type ParentComponent,
+  createSignal,
+  onCleanup,
+  onMount
+} from 'solid-js'
 import { cn } from '~/utils/cn'
 
 export interface KunScrollShadowProps {
@@ -6,10 +11,11 @@ export interface KunScrollShadowProps {
   shadowColor?: string
   shadowSize?: string
   class?: string
-  children?: any
 }
 
-export const KunScrollShadow: Component<KunScrollShadowProps> = (props) => {
+export const KunScrollShadow: ParentComponent<KunScrollShadowProps> = (
+  props
+) => {
   const axis = props.axis ?? 'horizontal'
   const shadowColor = props.shadowColor ?? 'var(--color-background)'
   const shadowSize = props.shadowSize ?? '2rem'
@@ -49,7 +55,7 @@ export const KunScrollShadow: Component<KunScrollShadowProps> = (props) => {
     update()
     scrollContainer?.addEventListener('scroll', onScroll, {
       passive: true
-    } as any)
+    })
     window.addEventListener('resize', onResize)
   })
   onCleanup(() => {
@@ -68,14 +74,14 @@ export const KunScrollShadow: Component<KunScrollShadowProps> = (props) => {
       axis === 'horizontal'
         ? `linear-gradient(to right, ${shadowColor}, transparent)`
         : `linear-gradient(to bottom, ${shadowColor}, transparent)`
-  } as any
+  }
   const endStyle = {
     [axis === 'horizontal' ? 'width' : 'height']: shadowSize,
     'background-image':
       axis === 'horizontal'
         ? `linear-gradient(to left, ${shadowColor}, transparent)`
         : `linear-gradient(to top, ${shadowColor}, transparent)`
-  } as any
+  }
 
   return (
     <div class="relative">
@@ -115,5 +121,3 @@ export const KunScrollShadow: Component<KunScrollShadowProps> = (props) => {
     </div>
   )
 }
-
-export default KunScrollShadow

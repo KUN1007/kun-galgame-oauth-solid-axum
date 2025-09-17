@@ -1,4 +1,10 @@
-import { type Component, Show, onCleanup, onMount, splitProps } from 'solid-js'
+import {
+  type ParentComponent,
+  Show,
+  onCleanup,
+  onMount,
+  splitProps
+} from 'solid-js'
 import { Portal } from 'solid-js/web'
 import { cn } from '~/utils/cn'
 import { KunButton } from './KunButton'
@@ -13,7 +19,6 @@ export interface KunModalProps {
   withContainer?: boolean
   onUpdateModalValue?: (value: boolean) => void
   onClose?: () => void
-  children?: any
 }
 
 const lockScroll = () => {
@@ -28,7 +33,7 @@ const unlockScroll = () => {
   document.body.style.paddingRight = ''
 }
 
-export const KunModal: Component<KunModalProps> = (allProps) => {
+export const KunModal: ParentComponent<KunModalProps> = (allProps) => {
   const [props, others] = splitProps(allProps, [
     'modalValue',
     'class',
@@ -113,5 +118,3 @@ export const KunModal: Component<KunModalProps> = (allProps) => {
     </Portal>
   )
 }
-
-export default KunModal

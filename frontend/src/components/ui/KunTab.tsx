@@ -135,5 +135,3 @@ export const KunTab: Component<KunTabProps> = (props) => {
     </div>
   )
 }
-
-export default KunTab

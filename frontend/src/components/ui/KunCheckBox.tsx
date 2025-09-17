@@ -50,7 +50,7 @@ export const KunCheckBox: Component<KunCheckBoxProps> = (allProps) => {
           type="checkbox"
           id={props.id}
           name={props.name}
-          value={props.value as any}
+          value={props.value as unknown as string}
           checked={!!props.modelValue}
           disabled={props.disabled}
           class={cn(
@@ -77,5 +77,3 @@ export const KunCheckBox: Component<KunCheckBoxProps> = (allProps) => {
     </div>
   )
 }
-
-export default KunCheckBox

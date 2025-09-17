@@ -38,6 +38,7 @@ export interface KunSiteImage {
 }
 
 export interface KunSiteConfig {
+  owner: string
   name: string
   title: string
   titleShort: string

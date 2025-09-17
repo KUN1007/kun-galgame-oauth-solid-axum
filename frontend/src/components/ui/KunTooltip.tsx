@@ -1,15 +1,14 @@
-import { type Component, createSignal } from 'solid-js'
+import { type ParentComponent, type JSX, createSignal } from 'solid-js'
 import { cn } from '~/utils/cn'
 
 export interface KunTooltipProps {
   text?: string
   position?: 'top' | 'bottom' | 'left' | 'right'
   class?: string
-  children?: any
-  content?: any
+  content?: JSX.Element | string
 }
 
-export const KunTooltip: Component<KunTooltipProps> = (props) => {
+export const KunTooltip: ParentComponent<KunTooltipProps> = (props) => {
   const [isVisible, setIsVisible] = createSignal(false)
 
   const positionClasses = () => {
@@ -71,5 +70,3 @@ export const KunTooltip: Component<KunTooltipProps> = (props) => {
     </div>
   )
 }
-
-export default KunTooltip

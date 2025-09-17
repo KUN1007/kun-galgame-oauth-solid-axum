@@ -130,7 +130,7 @@ export const KunDatePicker: Component<
             value={(value() as string | null) ?? ''}
             onInput={(e) => {
               const v = (e.target as HTMLInputElement).value || null
-              setValue(v as any)
+              setValue(v)
               props.onUpdateModelValue?.(v)
             }}
           />
@@ -141,5 +141,3 @@ export const KunDatePicker: Component<
     </div>
   )
 }
-
-export default KunDatePicker

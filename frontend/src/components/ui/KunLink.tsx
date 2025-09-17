@@ -1,4 +1,4 @@
-import { type Component, splitProps } from 'solid-js'
+import { type ParentComponent, type JSX, splitProps } from 'solid-js'
 import { A } from '@solidjs/router'
 import type { KunUIColor, KunUISize } from './type'
 import { cn } from '~/utils/cn'
@@ -13,8 +13,8 @@ export interface KunLinkProps extends Record<string, any> {
   rel?: string
   target?: '_self' | '_blank' | '_parent' | '_top'
   isShowAnchorIcon?: boolean
-  prefix?: any
-  suffix?: any
+  prefix?: JSX.Element
+  suffix?: JSX.Element
 }
 
 const colorClasses: Record<
@@ -44,7 +44,7 @@ const underlineMap = {
   always: 'underline underline-offset-3'
 } as const
 
-export const KunLink: Component<KunLinkProps> = (allProps) => {
+export const KunLink: ParentComponent<KunLinkProps> = (allProps) => {
   const [props, others] = splitProps(allProps, [
     'to',
     'color',
@@ -102,5 +102,3 @@ export const KunLink: Component<KunLinkProps> = (allProps) => {
     </a>
   )
 }
-
-export default KunLink

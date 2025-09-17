@@ -143,5 +143,3 @@ export const KunPagination: Component<KunPaginationProps> = (props) => {
     </div>
   )
 }
-
-export default KunPagination

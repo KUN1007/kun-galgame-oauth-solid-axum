@@ -10,5 +10,3 @@ export interface IconProps {
 export const Icon: Component<IconProps> = (props) => {
   return <KunIcon name={props.name} class={cn(props.class)} />
 }
-
-export default Icon

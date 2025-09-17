@@ -82,5 +82,3 @@ export const KunAvatar: Component<KunAvatarProps> = (props) => {
     </div>
   )
 }
-
-export default KunAvatar

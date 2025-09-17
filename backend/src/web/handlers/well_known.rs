@@ -26,3 +26,12 @@ pub async fn openid_config() -> Json<OpenIdConfig> {
         id_token_signing_alg_values_supported: ["RS256"],
     })
 }
+
+#[derive(Serialize)]
+pub struct Jwks {
+    pub keys: Vec<serde_json::Value>,
+}
+
+pub async fn jwks() -> Json<Jwks> {
+    Json(Jwks { keys: vec![] })
+}

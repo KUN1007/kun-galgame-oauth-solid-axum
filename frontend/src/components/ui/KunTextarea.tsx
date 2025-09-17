@@ -92,7 +92,7 @@ export const KunTextarea: Component<KunTextareaProps> = (allProps) => {
         <textarea
           id={id}
           ref={textareaRef}
-          value={localValue() as any}
+          value={localValue()}
           name={props.name}
           placeholder={props.placeholder}
           disabled={props.disabled}
@@ -136,5 +136,3 @@ export const KunTextarea: Component<KunTextareaProps> = (allProps) => {
     </div>
   )
 }
-
-export default KunTextarea

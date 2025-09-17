@@ -1,11 +1,18 @@
 import { type Component, createSignal, onCleanup, onMount } from 'solid-js'
+import type { JSX } from 'solid-js/jsx-runtime'
 import { cn } from '~/utils/cn'
 
 export interface KunPopoverProps {
-  position?: 'top-start' | 'top-end' | 'bottom-start' | 'bottom-end'
+  position?:
+    | 'top-start'
+    | 'top-center'
+    | 'top-end'
+    | 'bottom-start'
+    | 'bottom-center'
+    | 'bottom-end'
   innerClass?: string
-  trigger?: any
-  children?: any
+  trigger?: JSX.Element
+  children?: JSX.Element | JSX.Element[] | string
 }
 
 export const KunPopover: Component<KunPopoverProps> = (props) => {
@@ -20,9 +27,13 @@ export const KunPopover: Component<KunPopoverProps> = (props) => {
         return 'bottom-full left-0 mb-2'
       case 'top-end':
         return 'bottom-full right-0 mb-2'
+      case 'top-center':
+        return 'bottom-full left-1/2 -translate-x-1/2 mb-2'
       case 'bottom-end':
         return 'top-full right-0'
-      default:
+      case 'bottom-center':
+        return 'top-full left-1/2 -translate-x-1/2 mt-2'
+      default: // bottom-start
         return 'top-full left-0'
     }
   }
@@ -82,5 +93,3 @@ export const KunPopover: Component<KunPopoverProps> = (props) => {
     </div>
   )
 }
-
-export default KunPopover

@@ -2,39 +2,39 @@ import { createSignal, For, Show } from 'solid-js'
 import { KunButton } from '../components/ui/KunButton'
 import { KunCard } from '../components/ui/KunCard'
 import { KunIcon } from '../components/ui/KunIcon'
-import KunBadge from '../components/ui/KunBadge'
-import KunDivider from '../components/ui/KunDivider'
-import KunLink from '../components/ui/KunLink'
-import KunAvatar, { type KunUser } from '../components/ui/KunAvatar'
-import KunImage from '../components/ui/KunImage'
-import KunContent from '../components/ui/KunContent'
-import KunInfo from '../components/ui/KunInfo'
-import KunNull from '../components/ui/KunNull'
-import KunBrand from '../components/ui/KunBrand'
-import KunLightbox from '../components/ui/KunLightbox'
-import KunLoading from '../components/ui/KunLoading'
-import KunFadeCard from '../components/ui/KunFadeCard'
-import KunScrollShadow from '../components/ui/KunScrollShadow'
-import KunUserCard from '../components/ui/KunUser'
-import KunInput from '../components/ui/KunInput'
-import KunTextarea from '../components/ui/KunTextarea'
-import KunCheckBox from '../components/ui/KunCheckBox'
-import KunSwitch from '../components/ui/KunSwitch'
-import KunSlider from '../components/ui/KunSlider'
-import KunSelect from '../components/ui/KunSelect'
-import KunUpload from '../components/ui/KunUpload'
-import KunModal from '../components/ui/KunModal'
-import KunPopover from '../components/ui/KunPopover'
-import KunTooltip from '../components/ui/KunTooltip'
-import KunTab from '../components/ui/KunTab'
-import KunPagination from '../components/ui/KunPagination'
-import KunDatePicker from '../components/ui/KunDatePicker'
-import KunEditor from '../components/ui/editor/KunEditor'
+import { KunBadge } from '../components/ui/KunBadge'
+import { KunLink } from '../components/ui/KunLink'
+import { KunAvatar } from '../components/ui/KunAvatar'
+import { KunImage } from '../components/ui/KunImage'
+import { KunContent } from '../components/ui/KunContent'
+import { KunInfo } from '../components/ui/KunInfo'
+import { KunNull } from '../components/ui/KunNull'
+import { KunBrand } from '../components/ui/KunBrand'
+import { KunLightbox } from '../components/ui/KunLightbox'
+import { KunLoading } from '../components/ui/KunLoading'
+import { KunFadeCard } from '../components/ui/KunFadeCard'
+import { KunScrollShadow } from '../components/ui/KunScrollShadow'
+import { KunUserCard } from '../components/ui/KunUser'
+import { KunInput } from '../components/ui/KunInput'
+import { KunTextarea } from '../components/ui/KunTextarea'
+import { KunCheckBox } from '../components/ui/KunCheckBox'
+import { KunSwitch } from '../components/ui/KunSwitch'
+import { KunSlider } from '../components/ui/KunSlider'
+import { KunSelect } from '../components/ui/KunSelect'
+import { KunUpload } from '../components/ui/KunUpload'
+import { KunModal } from '../components/ui/KunModal'
+import { KunPopover } from '../components/ui/KunPopover'
+import { KunTooltip } from '../components/ui/KunTooltip'
+import { KunTab } from '../components/ui/KunTab'
+import { KunPagination } from '../components/ui/KunPagination'
+import { KunDatePicker } from '../components/ui/KunDatePicker'
+import { KunEditor } from '../components/ui/editor/KunEditor'
+import { Favicon } from '../components/ui/icons/Favicon'
+import { Markdown } from '../components/ui/icons/Markdown'
 import { useKunMessage } from '../components/ui/message/useMessage'
-import Favicon from '../components/ui/icons/Favicon'
-import MarkdownIcon from '../components/ui/icons/Markdown'
+import type { ParentComponent } from 'solid-js'
 
-const Section = (props: { title: string; children: any }) => (
+const Section: ParentComponent<{ title: string }> = (props) => (
   <div class="space-y-3">
     <h2 class="text-xl font-semibold">{props.title}</h2>
     <div class="bg-content1/60 rounded-lg border p-4 shadow-sm">
@@ -89,7 +89,7 @@ export const UiShowcase = () => {
           </KunBadge>
           <KunIcon name="lucide:alarm-clock" />
           <Favicon />
-          <MarkdownIcon />
+          <Markdown />
         </div>
       </Section>
 
@@ -288,5 +288,3 @@ export const UiShowcase = () => {
     </div>
   )
 }
-
-export default UiShowcase

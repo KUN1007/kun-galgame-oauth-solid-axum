@@ -10,6 +10,7 @@
     "healthz",
     "Hoverable",
     "iconify",
+    "infras",
     "jsonwebtoken",
     "kungal",
     "kungalgame",
@@ -24,6 +25,7 @@
     "solidjs",
     "sqlx",
     "thiserror",
+    "TIMESTAMPTZ",
     "userinfo",
     "VNDB"
   ],

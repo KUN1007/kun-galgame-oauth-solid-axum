@@ -15,5 +15,3 @@ export const Favicon: Component = () => (
     <circle cx="10" cy="68" r="4" fill="#8b88e3" />
   </svg>
 )
-
-export default Favicon

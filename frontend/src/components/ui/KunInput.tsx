@@ -13,7 +13,10 @@ let inputSeed = 0
 const uniqueId = (prefix: string) => `${prefix}-${++inputSeed}`
 
 export interface KunInputProps
-  extends Omit<JSX.InputHTMLAttributes<HTMLInputElement>, 'size' | 'color'> {
+  extends Omit<
+    JSX.InputHTMLAttributes<HTMLInputElement>,
+    'size' | 'color' | 'prefix'
+  > {
   modelValue?: string | number
   label?: string
   type?: string
@@ -27,8 +30,8 @@ export interface KunInputProps
   disabled?: boolean
   darkBorder?: boolean
   autofocus?: boolean
-  prefix?: any
-  suffix?: any
+  prefix?: JSX.Element
+  suffix?: JSX.Element
 }
 
 export const KunInput: Component<KunInputProps> = (allProps) => {
@@ -103,7 +106,7 @@ export const KunInput: Component<KunInputProps> = (allProps) => {
         <input
           id={id}
           ref={inputRef}
-          value={value() as any}
+          value={value()}
           type={props.type ?? 'text'}
           placeholder={props.placeholder}
           disabled={props.disabled}
@@ -142,5 +145,3 @@ export const KunInput: Component<KunInputProps> = (allProps) => {
     </div>
   )
 }
-
-export default KunInput

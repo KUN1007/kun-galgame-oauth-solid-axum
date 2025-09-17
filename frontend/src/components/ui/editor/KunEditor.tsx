@@ -23,5 +23,3 @@ export const KunEditor: Component<KunEditorProps> = (props) => {
     />
   )
 }
-
-export default KunEditor

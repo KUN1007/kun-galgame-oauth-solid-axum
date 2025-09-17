@@ -36,5 +36,3 @@ export const KunSlider: Component<KunSliderProps> = (props) => {
     </div>
   )
 }
-
-export default KunSlider

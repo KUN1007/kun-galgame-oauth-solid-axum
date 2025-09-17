@@ -5,7 +5,7 @@ import {
   type JSX,
   type ParentComponent
 } from 'solid-js'
-import { Dynamic } from 'solid-js/web'
+import { A } from '@solidjs/router'
 import { cn } from '~/utils/cn'
 import { withDefaults } from '~/utils/withDefaults'
 import { useRipple } from './ripple/useRipple'
@@ -27,9 +27,6 @@ export interface KunButtonProps
   icon?: JSX.Element
   iconPosition?: 'left' | 'right'
   class?: string
-  href?: string
-  target?: '_blank' | '_self' | '_parent' | '_top'
-  'aria-label'?: string
 }
 
 export const KunButton: ParentComponent<KunButtonProps> = (props) => {
@@ -43,8 +40,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
     loading: false,
     fullWidth: false,
     isIconOnly: false,
-    iconPosition: 'left',
-    target: '_self'
+    iconPosition: 'left'
   })
 
   const [local, others] = splitProps(merged, [
@@ -59,8 +55,6 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
     'disabled',
     'iconPosition',
     'class',
-    'href',
-    'target',
     'children',
     'onClick'
   ])
@@ -224,8 +218,7 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
   })
 
   return (
-    <Dynamic
-      component={local.href ? 'a' : 'button'}
+    <button
       class={cn(
         'relative inline-flex cursor-pointer items-center justify-center gap-1 overflow-hidden rounded-md font-medium transition-all hover:opacity-80 active:scale-[0.97] disabled:opacity-50',
         sizeClasses(),
@@ -236,11 +229,8 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
         (local.disabled || local.loading) && 'cursor-not-allowed',
         local.class
       )}
-      href={local.href}
-      target={local.target}
       {...others}
       disabled={local.disabled || local.loading}
-      role={local.href ? 'link' : 'button'}
       aria-label={computedAriaLabel()}
       onClick={handleClick}
     >
@@ -259,6 +249,19 @@ export const KunButton: ParentComponent<KunButtonProps> = (props) => {
       </Show>
 
       <KunRipple ripples={ripples()} />
-    </Dynamic>
+    </button>
+  )
+}
+
+export const KunLinkButton: ParentComponent<
+  KunButtonProps & {
+    href: string
+    target?: '_blank' | '_self' | '_parent' | '_top'
+  }
+> = (props) => {
+  return (
+    <A href={props.href} target={props.target} class="inline-flex">
+      <KunButton {...props} />
+    </A>
   )
 }

@@ -61,5 +61,3 @@ export const KunSwitch: Component<KunSwitchProps> = (props) => {
     </label>
   )
 }
-
-export default KunSwitch

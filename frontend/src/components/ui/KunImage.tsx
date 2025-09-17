@@ -1,7 +1,8 @@
-import { type Component, splitProps } from 'solid-js'
 import { cn } from '~/utils/cn'
+import { type Component, splitProps } from 'solid-js'
+import type { JSX } from 'solid-js/jsx-runtime'
 
-export interface KunImageProps extends Record<string, any> {
+export interface KunImageProps extends JSX.ImgHTMLAttributes<HTMLImageElement> {
   src: string
   alt?: string
   class?: string
@@ -25,5 +26,3 @@ export const KunImage: Component<KunImageProps> = (allProps) => {
     />
   )
 }
-
-export default KunImage

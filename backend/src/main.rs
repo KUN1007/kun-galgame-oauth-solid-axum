@@ -20,6 +20,7 @@ async fn main() -> anyhow::Result<()> {
     let cfg = config::AppConfig::load()?;
 
     let pg = db::init_pg_pool(&cfg.database.url).await?;
+    db::migrate(&pg).await?;
     let redis = redis::init_redis(&cfg.redis.url).await?;
     let metrics = metrics::init_registry();
 

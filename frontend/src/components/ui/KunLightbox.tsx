@@ -1,6 +1,6 @@
 import { type Component, createSignal, type JSX } from 'solid-js'
-import KunModal from './KunModal'
-import KunImage from './KunImage'
+import { KunModal } from './KunModal'
+import { KunImage } from './KunImage'
 
 export interface KunLightboxProps {
   src: string
@@ -39,5 +39,3 @@ export const KunLightbox: Component<KunLightboxProps> = (props) => {
     </>
   )
 }
-
-export default KunLightbox

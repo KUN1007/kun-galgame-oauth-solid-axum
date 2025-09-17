@@ -1,4 +1,4 @@
-import { type Component } from 'solid-js'
+import { type ParentComponent } from 'solid-js'
 import type { KunUIColor } from './type'
 import { cn } from '~/utils/cn'
 
@@ -7,7 +7,6 @@ export interface KunDividerProps {
   color?: KunUIColor
   borderStyle?: 'solid' | 'dashed'
   class?: string
-  children?: any
 }
 
 const colorClasses: Record<KunUIColor, string> = {
@@ -19,7 +18,7 @@ const colorClasses: Record<KunUIColor, string> = {
   danger: 'border-danger/20'
 }
 
-export const KunDivider: Component<KunDividerProps> = (props) => {
+export const KunDivider: ParentComponent<KunDividerProps> = (props) => {
   const orientation = props.orientation ?? 'horizontal'
   const borderStyle = props.borderStyle ?? 'solid'
   const color = props.color ?? 'default'
@@ -66,5 +65,3 @@ export const KunDivider: Component<KunDividerProps> = (props) => {
     </div>
   )
 }
-
-export default KunDivider

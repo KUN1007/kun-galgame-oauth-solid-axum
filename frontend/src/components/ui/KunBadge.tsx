@@ -1,4 +1,4 @@
-import { type Component, createMemo } from 'solid-js'
+import { type ParentComponent, createMemo } from 'solid-js'
 import type { KunUIColor, KunUISize, KunUIVariant } from './type'
 import { cn } from '~/utils/cn'
 
@@ -7,10 +7,9 @@ export interface KunBadgeProps {
   color?: KunUIColor
   size?: KunUISize
   variant?: KunUIVariant
-  children?: any
 }
 
-export const KunBadge: Component<KunBadgeProps> = (props) => {
+export const KunBadge: ParentComponent<KunBadgeProps> = (props) => {
   const variantClasses = createMemo(() => {
     switch (props.variant) {
       case 'solid':
@@ -119,5 +118,3 @@ export const KunBadge: Component<KunBadgeProps> = (props) => {
     </span>
   )
 }
-
-export default KunBadge

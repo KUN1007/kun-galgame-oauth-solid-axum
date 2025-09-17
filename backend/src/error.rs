@@ -14,4 +14,10 @@ pub enum Error {
     Io(#[from] std::io::Error),
     #[error("other: {0}")]
     Other(#[from] anyhow::Error),
+    #[error("jwt error: {0}")]
+    Jwt(#[from] jsonwebtoken::errors::Error),
+    #[error("time error: {0}")]
+    Time(#[from] std::time::SystemTimeError),
+    #[error("uuid error: {0}")]
+    Uuid(#[from] uuid::Error),
 }

@@ -61,7 +61,7 @@ export const KunSelect: Component<KunSelectProps> = (allProps) => {
           props.disabled && 'bg-default-100 cursor-not-allowed'
         )}
         disabled={props.disabled}
-        value={props.modelValue as any}
+        value={props.modelValue}
         onChange={handleChange}
         {...others}
       >
@@ -71,12 +71,10 @@ export const KunSelect: Component<KunSelectProps> = (allProps) => {
           </option>
         )}
         {props.options.map((opt) => (
-          <option value={opt.value as any}>{opt.label}</option>
+          <option value={opt.value}>{opt.label}</option>
         ))}
       </select>
       {props.error && <p class="text-danger mt-2 text-sm">{props.error}</p>}
     </div>
   )
 }
-
-export default KunSelect

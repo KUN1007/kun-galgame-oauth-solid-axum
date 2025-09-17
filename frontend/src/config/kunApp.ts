@@ -1,5 +1,6 @@
 import type { KunSiteConfig } from './config'
 
+const KUN_SITE_OWNER = '鲲 Galgame'
 const KUN_SITE_NAME = '鲲 Galgame OAuth 系统'
 const KUN_SITE_SHORT = '鲲 Galgame OAuth'
 const KUN_SITE_MENTION = '@kungalgame_auth'
@@ -32,6 +33,7 @@ const KUN_SITE_VALID_DOMAIN_LIST = ['www.kungal.com', 'www.kungal.org']
 const KUN_SITE_KEYWORDS = ['Galgame', 'OAuth', 'Solid.js', 'Axum-web']
 
 export const kunOauth: KunSiteConfig = {
+  owner: KUN_SITE_OWNER,
   name: KUN_SITE_NAME,
   title: KUN_SITE_TITLE,
   titleShort: KUN_SITE_SHORT,

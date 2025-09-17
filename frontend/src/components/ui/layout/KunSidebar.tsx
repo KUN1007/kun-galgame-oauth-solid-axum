@@ -20,5 +20,3 @@ export const KunLayoutSidebar: Component<{
     </div>
   )
 }
-
-export default KunLayoutSidebar

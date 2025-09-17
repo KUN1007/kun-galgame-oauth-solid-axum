@@ -1,6 +1,6 @@
-import { type Component, type JSX, Show, children, createMemo } from 'solid-js'
-import { KunImage } from './KunImage'
 import { cn } from '~/utils/cn'
+import { KunImage } from './KunImage'
+import { type Component, type JSX, Show, children, createMemo } from 'solid-js'
 
 export interface KunLoadingProps {
   loading?: boolean
@@ -49,5 +49,3 @@ export const KunLoading: Component<KunLoadingProps> = (props) => {
     </Show>
   )
 }
-
-export default KunLoading

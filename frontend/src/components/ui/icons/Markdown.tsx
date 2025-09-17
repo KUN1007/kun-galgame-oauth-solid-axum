@@ -20,5 +20,3 @@ export const Markdown: Component<{ class?: string } & Record<string, any>> = (
     </svg>
   )
 }
-
-export default Markdown
