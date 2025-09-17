@@ -7,6 +7,7 @@
     "dotenv",
     "dotenvy",
     "galgame",
+    "healthz",
     "Hoverable",
     "iconify",
     "jsonwebtoken",
@@ -23,6 +24,7 @@
     "solidjs",
     "sqlx",
     "thiserror",
+    "userinfo",
     "VNDB"
   ],
   "editor.codeActionsOnSave": {

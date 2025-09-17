@@ -2,11 +2,11 @@
   "name": "kun-galgame-oauth-solid-axum",
   "private": true,
   "scripts": {
-    "dev": "concurrently \"npm:dev:frontend\" \"npm:dev:backend\"",
-    "dev:frontend": "cd frontend && npm run dev",
+    "dev": "concurrently \"pnpm:dev:frontend\" \"pnpm:dev:backend\"",
+    "dev:frontend": "cd frontend && pnpm run dev",
     "dev:backend": "cd backend && cargo watch -x run",
-    "build": "npm run build:frontend && npm run build:backend",
-    "build:frontend": "cd frontend && npm run build",
+    "build": "pnpm run build:frontend && pnpm run build:backend",
+    "build:frontend": "cd frontend && pnpm run build",
     "build:backend": "cd backend && cargo build --release"
   },
   "devDependencies": {

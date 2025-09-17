@@ -1,29 +1,35 @@
-use axum::{Json, Router, routing::get};
-use serde_json::{Value, json};
-// use tower_http::services::ServeDir;
-use tracing_subscriber::{layer::SubscriberExt, util::SubscriberInitExt};
+mod config;
+mod domain;
+mod error;
+mod infra;
+mod prelude;
+mod repo;
+mod service;
+mod state;
+mod web;
+
+use crate::infra::{db, metrics, redis, tracing as infra_tracing};
+use crate::state::AppState;
+use crate::web::router::build_router;
 
 #[tokio::main]
-async fn main() {
-    tracing_subscriber::registry()
-        .with(
-            tracing_subscriber::EnvFilter::try_from_default_env()
-                .unwrap_or_else(|_| "oauth=debug,tower_http=debug".into()),
-        )
-        .with(tracing_subscriber::fmt::layer())
-        .init();
+async fn main() -> anyhow::Result<()> {
+    dotenvy::dotenv().ok();
+    infra_tracing::init();
 
-    let app = Router::new()
-        // .nest_service("/", ServeDir::new("../frontend/dist"))
-        .route("/api/moe", get(moe_handler));
+    let cfg = config::AppConfig::load()?;
 
-    let listener = tokio::net::TcpListener::bind("127.0.0.1:1314")
-        .await
-        .unwrap();
-    tracing::debug!("listening on {}", listener.local_addr().unwrap());
-    axum::serve(listener, app).await.unwrap();
-}
+    let pg = db::init_pg_pool(&cfg.database.url).await?;
+    let redis = redis::init_redis(&cfg.redis.url).await?;
+    let metrics = metrics::init_registry();
 
-async fn moe_handler() -> Json<Value> {
-    Json(json!({ "message": "Moe~" }))
+    let state = AppState::new(cfg.clone(), pg, redis, metrics.clone());
+
+    let app = build_router(state, metrics);
+
+    let addr = format!("{}:{}", cfg.server.host, cfg.server.port);
+    let listener = tokio::net::TcpListener::bind(&addr).await?;
+    tracing::info!("listening on {}", addr);
+    axum::serve(listener, app).await?;
+    Ok(())
 }
