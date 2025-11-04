@@ -1,4 +1,4 @@
-# OAuth Backend Architecture (Axum + Tokio + SQLx)
+# OAuth Backend Architecture (Axum + Tokio + SeaORM)
 
 Goal: provide a high‑performance, highly‑available OAuth 2.1/OIDC authorization service for multiple sites, with modular single‑responsibility design.
 
@@ -7,7 +7,7 @@ Goal: provide a high‑performance, highly‑available OAuth 2.1/OIDC authorizat
 - `src/config`: configuration loading (env + optional file), typed config structs
 - `src/infra`: host‑level concerns
   - `tracing`: structured logging setup
-  - `db`: PostgreSQL pool setup (`sqlx`)
+  - `db`: PostgreSQL connection setup (`sea-orm`)
   - `redis`: Redis connection setup
   - `metrics`: Prometheus text exposition at `/metrics`
 - `src/state`: `AppState` (config + pools + metrics)
@@ -20,7 +20,7 @@ Goal: provide a high‑performance, highly‑available OAuth 2.1/OIDC authorizat
     - `well_known`: `/.well-known/openid-configuration`
     - `oauth`: `/api/oauth/*` endpoints (authorize/token/userinfo/introspect/revoke)
 - `src/domain`: business entities (User, Client, OAuth types)
-- `src/repo`: persistence boundary (ClientRepo/UserRepo/TokenRepo) – SQLx based
+- `src/repo`: persistence boundary (ClientRepo/UserRepo/TokenRepo) - SeaORM-based (+ limited raw SQL where needed)
 - `src/service`: application services (OAuth, User, Client, Token)
 
 All HTTP side effects go through services, and services use repositories; handlers stay thin.
@@ -61,4 +61,3 @@ Environment variables supported (either **namespaced** or **classic**):
 - `OAUTH__ISSUER`, `OAUTH__ACCESS_TOKEN_TTL_SECS`, `OAUTH__REFRESH_TOKEN_TTL_SECS`
 
 Optionally set `APP_CONFIG` to a YAML/TOML file consumed by `config`.
-

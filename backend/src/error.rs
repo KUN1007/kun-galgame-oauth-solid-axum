@@ -5,7 +5,7 @@ pub type Result<T, E = Error> = std::result::Result<T, E>;
 #[derive(Debug, Error)]
 pub enum Error {
     #[error("database error: {0}")]
-    Sqlx(#[from] sqlx::Error),
+    Db(#[from] sea_orm::DbErr),
     #[error("redis error: {0}")]
     Redis(#[from] redis::RedisError),
     #[error("config error: {0}")]

@@ -1,83 +1,99 @@
 use crate::domain::user::User;
+use crate::entity::users;
 use crate::prelude::*;
-use sqlx::{PgPool, FromRow};
+use sea_orm::{ActiveModelTrait, ColumnTrait, EntityTrait, QueryFilter, Set};
 use uuid::Uuid;
-use chrono::{DateTime, Utc};
 
-#[derive(FromRow)]
-struct UserRow {
-    id: Uuid,
-    username: String,
-    email: String,
-    avatar: Option<String>,
-    status: String,
-    password_hash: String,
-    created_at: DateTime<Utc>,
-    updated_at: DateTime<Utc>,
-    last_login_at: Option<DateTime<Utc>>,
+pub struct UserRepo<'a> {
+    pub db: &'a sea_orm::DatabaseConnection,
 }
-
-impl From<UserRow> for User {
-    fn from(r: UserRow) -> Self {
-        User {
-            id: r.id.to_string(),
-            username: r.username,
-            email: r.email,
-            avatar: r.avatar,
-            status: r.status,
-            password_hash: r.password_hash,
-            created_at: r.created_at,
-            updated_at: r.updated_at,
-            last_login_at: r.last_login_at,
-        }
-    }
-}
-
-pub struct UserRepo<'a> { pub pool: &'a PgPool }
 
 impl<'a> UserRepo<'a> {
-    pub fn new(pool: &'a PgPool) -> Self { Self { pool } }
+    pub fn new(db: &'a sea_orm::DatabaseConnection) -> Self {
+        Self { db }
+    }
 
-    pub async fn create_user(&self, id: Uuid, username: &str, email: &str, password_hash: &str, avatar: Option<&str>) -> Result<User> {
-        let rec: UserRow = sqlx::query_as::<_, UserRow>(
-            r#"INSERT INTO users (id, username, email, password_hash, avatar)
-               VALUES ($1,$2,$3,$4,$5)
-               RETURNING id, username, email, avatar, status, password_hash, created_at, updated_at, last_login_at"#,
-        )
-        .bind(id)
-        .bind(username)
-        .bind(email)
-        .bind(password_hash)
-        .bind(avatar)
-        .fetch_one(self.pool)
-        .await?;
-        Ok(rec.into())
+    pub async fn create_user(
+        &self,
+        id: Uuid,
+        username: &str,
+        email: &str,
+        password_hash: &str,
+        avatar: Option<&str>,
+    ) -> Result<User> {
+        let now = chrono::Utc::now();
+        let am = users::ActiveModel {
+            id: Set(id),
+            username: Set(username.to_string()),
+            email: Set(email.to_string()),
+            avatar: Set(avatar.map(|s| s.to_string())),
+            status: Set("active".to_string()),
+            password_hash: Set(password_hash.to_string()),
+            created_at: Set(now.into()),
+            updated_at: Set(now.into()),
+            last_login_at: Set(None),
+        };
+        let m = am.insert(self.db).await?;
+        Ok(User {
+            id: m.id.to_string(),
+            username: m.username,
+            email: m.email,
+            avatar: m.avatar,
+            status: m.status,
+            password_hash: m.password_hash,
+            created_at: m.created_at.with_timezone(&chrono::Utc),
+            updated_at: m.updated_at.with_timezone(&chrono::Utc),
+            last_login_at: m.last_login_at.map(|d| d.with_timezone(&chrono::Utc)),
+        })
     }
 
     pub async fn find_by_username(&self, username: &str) -> Result<Option<User>> {
-        let opt: Option<UserRow> = sqlx::query_as("SELECT id, username, email, avatar, status, password_hash, created_at, updated_at, last_login_at FROM users WHERE username=$1")
-            .bind(username)
-            .fetch_optional(self.pool)
+        let opt = users::Entity::find()
+            .filter(users::Column::Username.eq(username))
+            .one(self.db)
             .await?;
-        Ok(opt.map(Into::into))
+        Ok(opt.map(|m| User {
+            id: m.id.to_string(),
+            username: m.username,
+            email: m.email,
+            avatar: m.avatar,
+            status: m.status,
+            password_hash: m.password_hash,
+            created_at: m.created_at.with_timezone(&chrono::Utc),
+            updated_at: m.updated_at.with_timezone(&chrono::Utc),
+            last_login_at: m.last_login_at.map(|d| d.with_timezone(&chrono::Utc)),
+        }))
     }
 
     pub async fn find_by_id(&self, id: &str) -> Result<Option<User>> {
-        let uuid = Uuid::parse_str(id).ok();
-        if uuid.is_none() { return Ok(None); }
-        let opt: Option<UserRow> = sqlx::query_as("SELECT id, username, email, avatar, status, password_hash, created_at, updated_at, last_login_at FROM users WHERE id=$1")
-            .bind(uuid.unwrap())
-            .fetch_optional(self.pool)
-            .await?;
-        Ok(opt.map(Into::into))
+        let uuid = match Uuid::parse_str(id) {
+            Ok(u) => u,
+            Err(_) => return Ok(None),
+        };
+        let opt = users::Entity::find_by_id(uuid).one(self.db).await?;
+        Ok(opt.map(|m| User {
+            id: m.id.to_string(),
+            username: m.username,
+            email: m.email,
+            avatar: m.avatar,
+            status: m.status,
+            password_hash: m.password_hash,
+            created_at: m.created_at.with_timezone(&chrono::Utc),
+            updated_at: m.updated_at.with_timezone(&chrono::Utc),
+            last_login_at: m.last_login_at.map(|d| d.with_timezone(&chrono::Utc)),
+        }))
     }
 
     pub async fn touch_last_login(&self, id: &str) -> Result<()> {
         let uuid = Uuid::parse_str(id)?;
-        sqlx::query("UPDATE users SET last_login_at=now(), updated_at=now() WHERE id=$1")
-            .bind(uuid)
-            .execute(self.pool)
-            .await?;
+        let now = chrono::Utc::now();
+        let am = users::ActiveModel {
+            id: Set(uuid),
+            last_login_at: Set(Some(now.into())),
+            updated_at: Set(now.into()),
+            ..Default::default()
+        };
+        am.update(self.db).await?;
         Ok(())
     }
 }

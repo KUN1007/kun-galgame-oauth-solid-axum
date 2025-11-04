@@ -1,15 +1,15 @@
 use crate::prelude::*;
 use crate::repo::user_repo::UserRepo;
-use sqlx::PgPool;
+use sea_orm::DatabaseConnection;
 
 pub struct UserService<'a> {
     users: UserRepo<'a>,
 }
 
 impl<'a> UserService<'a> {
-    pub fn new(pool: &'a PgPool) -> Self {
+    pub fn new(db: &'a DatabaseConnection) -> Self {
         Self {
-            users: UserRepo::new(pool),
+            users: UserRepo::new(db),
         }
     }
     pub async fn verify_password(&self, _username: &str, _password: &str) -> Result<bool> {

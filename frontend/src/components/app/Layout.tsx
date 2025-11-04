@@ -28,6 +28,13 @@ export const Layout = (props: ParentProps) => {
             >
               UI
             </KunLink>
+            {user && (
+              <>
+                <KunLink href={`/user/${user.id}`}>个人</KunLink>
+                <KunLink href="/clients">我的应用</KunLink>
+                <KunLink href="/clients/new">注册客户端</KunLink>
+              </>
+            )}
           </nav>
         </div>
 
@@ -42,7 +49,7 @@ export const Layout = (props: ParentProps) => {
             </>
           ) : (
             <KunLinkButton href={`/user/${user.id}`}>
-              {user.username || '我的'}
+              {user.username || '用户'}
             </KunLinkButton>
           )}
         </div>

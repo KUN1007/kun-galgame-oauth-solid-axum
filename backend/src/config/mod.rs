@@ -53,7 +53,10 @@ impl AppConfig {
 
         let cfg = builder.build()?;
         let mut s: Self = cfg.try_deserialize().unwrap_or(AppConfig {
-            server: ServerConfig { host: String::new(), port: 0 },
+            server: ServerConfig {
+                host: String::new(),
+                port: 0,
+            },
             database: DatabaseConfig { url: String::new() },
             redis: RedisConfig { url: String::new() },
             security: SecurityConfig {
@@ -64,7 +67,11 @@ impl AppConfig {
                 jwt_kid: None,
                 password_hash: String::new(),
             },
-            oauth: OAuthConfig { issuer: String::new(), access_token_ttl_secs: 0, refresh_token_ttl_secs: 0 },
+            oauth: OAuthConfig {
+                issuer: String::new(),
+                access_token_ttl_secs: 0,
+                refresh_token_ttl_secs: 0,
+            },
         });
 
         if s.server.host.is_empty() {

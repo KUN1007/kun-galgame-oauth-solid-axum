@@ -1,5 +1,5 @@
 [workspace]
-members = ["backend"]
+members = ["backend", "oauth-web", "server", "migration"]
 resolver = "3"
 
 [workspace.package]

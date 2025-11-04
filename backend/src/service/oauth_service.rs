@@ -1,6 +1,6 @@
 use crate::prelude::*;
 use crate::repo::{client_repo::ClientRepo, token_repo::TokenRepo};
-use sqlx::PgPool;
+use sea_orm::DatabaseConnection;
 
 pub struct OAuthService<'a> {
     clients: ClientRepo<'a>,
@@ -8,10 +8,10 @@ pub struct OAuthService<'a> {
 }
 
 impl<'a> OAuthService<'a> {
-    pub fn new(pool: &'a PgPool) -> Self {
+    pub fn new(db: &'a DatabaseConnection) -> Self {
         Self {
-            clients: ClientRepo::new(pool),
-            tokens: TokenRepo::new(pool),
+            clients: ClientRepo::new(db),
+            tokens: TokenRepo::new(db),
         }
     }
     pub async fn exchange_code(&self, _code: &str) -> Result<String> {

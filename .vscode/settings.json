@@ -2,6 +2,7 @@
   "cSpell.words": [
     "Avenir",
     "chrono",
+    "csec",
     "daisyui",
     "Dismissable",
     "dotenv",
@@ -21,7 +22,9 @@
     "ntvs",
     "PKCE",
     "Pressable",
+    "rustls",
     "serde",
+    "SETEX",
     "solidjs",
     "sqlx",
     "thiserror",

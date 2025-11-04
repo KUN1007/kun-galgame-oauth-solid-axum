@@ -1,13 +1,13 @@
 use crate::prelude::*;
-use sqlx::PgPool;
+use sea_orm::DatabaseConnection;
 
 pub struct TokenRepo<'a> {
-    pub pool: &'a PgPool,
+    pub db: &'a DatabaseConnection,
 }
 
 impl<'a> TokenRepo<'a> {
-    pub fn new(pool: &'a PgPool) -> Self {
-        Self { pool }
+    pub fn new(db: &'a DatabaseConnection) -> Self {
+        Self { db }
     }
     pub async fn store_auth_code(&self, _code: &str) -> Result<()> {
         Ok(())

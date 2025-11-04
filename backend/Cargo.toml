@@ -12,15 +12,16 @@ axum-extra = { version = "0.10.1", features = ["cookie-private"] }
 tower-http = { version = "0.6.6", features = ["fs", "trace"] }
 
 # Database
-sqlx = { version = "0.8.6", features = [
-    "runtime-tokio",
-    "postgres",
+sea-orm = { version = "1.1.16", features = [
+    "runtime-tokio-rustls",
+    "sqlx-postgres",
     "macros",
-    "chrono",
-    "uuid",
-    "json",
+    "with-chrono",
+    "with-uuid",
+    "with-json",
 ] }
 redis = { version = "0.32.5", features = ["tokio-comp"] }
+migration = { path = "../migration" }
 
 # Utilities
 chrono = { version = "0.4", features = ["serde"] }
