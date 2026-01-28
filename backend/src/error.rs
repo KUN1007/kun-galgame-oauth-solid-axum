@@ -5,7 +5,9 @@ pub type Result<T, E = Error> = std::result::Result<T, E>;
 #[derive(Debug, Error)]
 pub enum Error {
     #[error("database error: {0}")]
-    Db(#[from] sea_orm::DbErr),
+    Db(#[from] diesel::result::Error),
+    #[error("database pool error: {0}")]
+    Pool(#[from] diesel::r2d2::PoolError),
     #[error("redis error: {0}")]
     Redis(#[from] redis::RedisError),
     #[error("config error: {0}")]
@@ -20,4 +22,6 @@ pub enum Error {
     Time(#[from] std::time::SystemTimeError),
     #[error("uuid error: {0}")]
     Uuid(#[from] uuid::Error),
+    #[error("task join error: {0}")]
+    Join(#[from] tokio::task::JoinError),
 }

@@ -1,12 +1,12 @@
+use crate::infra::db::DbPool;
 use crate::prelude::*;
-use sea_orm::DatabaseConnection;
 
 pub struct TokenRepo<'a> {
-    pub db: &'a DatabaseConnection,
+    pub db: &'a DbPool,
 }
 
 impl<'a> TokenRepo<'a> {
-    pub fn new(db: &'a DatabaseConnection) -> Self {
+    pub fn new(db: &'a DbPool) -> Self {
         Self { db }
     }
     pub async fn store_auth_code(&self, _code: &str) -> Result<()> {

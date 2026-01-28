@@ -1,13 +1,13 @@
+use crate::infra::db::DbPool;
 use crate::prelude::*;
 use crate::repo::user_repo::UserRepo;
-use sea_orm::DatabaseConnection;
 
 pub struct UserService<'a> {
     users: UserRepo<'a>,
 }
 
 impl<'a> UserService<'a> {
-    pub fn new(db: &'a DatabaseConnection) -> Self {
+    pub fn new(db: &'a DbPool) -> Self {
         Self {
             users: UserRepo::new(db),
         }

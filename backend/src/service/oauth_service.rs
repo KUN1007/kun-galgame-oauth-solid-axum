@@ -1,6 +1,6 @@
+use crate::infra::db::DbPool;
 use crate::prelude::*;
 use crate::repo::{client_repo::ClientRepo, token_repo::TokenRepo};
-use sea_orm::DatabaseConnection;
 
 pub struct OAuthService<'a> {
     clients: ClientRepo<'a>,
@@ -8,7 +8,7 @@ pub struct OAuthService<'a> {
 }
 
 impl<'a> OAuthService<'a> {
-    pub fn new(db: &'a DatabaseConnection) -> Self {
+    pub fn new(db: &'a DbPool) -> Self {
         Self {
             clients: ClientRepo::new(db),
             tokens: TokenRepo::new(db),

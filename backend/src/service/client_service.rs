@@ -1,4 +1,5 @@
 use crate::domain::client::ClientPublic;
+use crate::infra::db::DbPool;
 use crate::prelude::*;
 use crate::repo::client_repo::{ClientRepo, NewClient};
 use argon2::password_hash::rand_core::OsRng;
@@ -8,7 +9,6 @@ use argon2::{
 };
 use base64::Engine as _;
 use rand::RngCore;
-use sea_orm::DatabaseConnection;
 use url::Url;
 
 pub struct ClientService<'a> {
@@ -38,7 +38,7 @@ pub struct ClientRegistrationInput {
 }
 
 impl<'a> ClientService<'a> {
-    pub fn new(db: &'a DatabaseConnection) -> Self {
+    pub fn new(db: &'a DbPool) -> Self {
         Self {
             clients: ClientRepo::new(db),
         }

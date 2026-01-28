@@ -1,12 +1,12 @@
 use crate::config::AppConfig;
+use crate::infra::db::DbPool;
 use crate::infra::metrics::MetricsRegistry;
-use sea_orm::DatabaseConnection;
 use std::sync::Arc;
 
 #[derive(Clone)]
 pub struct AppState {
     pub cfg: Arc<AppConfig>,
-    pub db: DatabaseConnection,
+    pub db: DbPool,
     pub redis: redis::Client,
     pub metrics: MetricsRegistry,
 }
@@ -14,7 +14,7 @@ pub struct AppState {
 impl AppState {
     pub fn new(
         cfg: AppConfig,
-        db: DatabaseConnection,
+        db: DbPool,
         redis: redis::Client,
         metrics: MetricsRegistry,
     ) -> Self {

@@ -1,15 +1,62 @@
 use crate::domain::user::User;
-use crate::entity::users;
+use crate::infra::db::{with_conn, DbPool};
 use crate::prelude::*;
-use sea_orm::{ActiveModelTrait, ColumnTrait, EntityTrait, QueryFilter, Set};
+use crate::schema::users;
+use chrono::{DateTime, Utc};
+use diesel::prelude::*;
+use diesel::SelectableHelper;
 use uuid::Uuid;
 
+#[derive(Debug, Clone, Queryable, Identifiable, Selectable)]
+#[diesel(table_name = users)]
+pub struct UserRow {
+    pub id: Uuid,
+    pub username: String,
+    pub email: String,
+    pub avatar: Option<String>,
+    pub status: String,
+    pub password_hash: String,
+    pub created_at: DateTime<Utc>,
+    pub updated_at: DateTime<Utc>,
+    pub last_login_at: Option<DateTime<Utc>>,
+}
+
+impl From<UserRow> for User {
+    fn from(row: UserRow) -> Self {
+        User {
+            id: row.id.to_string(),
+            username: row.username,
+            email: row.email,
+            avatar: row.avatar,
+            status: row.status,
+            password_hash: row.password_hash,
+            created_at: row.created_at,
+            updated_at: row.updated_at,
+            last_login_at: row.last_login_at,
+        }
+    }
+}
+
+#[derive(Insertable)]
+#[diesel(table_name = users)]
+struct NewUser {
+    id: Uuid,
+    username: String,
+    email: String,
+    avatar: Option<String>,
+    status: String,
+    password_hash: String,
+    created_at: DateTime<Utc>,
+    updated_at: DateTime<Utc>,
+    last_login_at: Option<DateTime<Utc>>,
+}
+
 pub struct UserRepo<'a> {
-    pub db: &'a sea_orm::DatabaseConnection,
+    pub db: &'a DbPool,
 }
 
 impl<'a> UserRepo<'a> {
-    pub fn new(db: &'a sea_orm::DatabaseConnection) -> Self {
+    pub fn new(db: &'a DbPool) -> Self {
         Self { db }
     }
 
@@ -22,47 +69,38 @@ impl<'a> UserRepo<'a> {
         avatar: Option<&str>,
     ) -> Result<User> {
         let now = chrono::Utc::now();
-        let am = users::ActiveModel {
-            id: Set(id),
-            username: Set(username.to_string()),
-            email: Set(email.to_string()),
-            avatar: Set(avatar.map(|s| s.to_string())),
-            status: Set("active".to_string()),
-            password_hash: Set(password_hash.to_string()),
-            created_at: Set(now.into()),
-            updated_at: Set(now.into()),
-            last_login_at: Set(None),
+        let new_user = NewUser {
+            id,
+            username: username.to_owned(),
+            email: email.to_owned(),
+            avatar: avatar.map(|s| s.to_owned()),
+            status: "active".to_string(),
+            password_hash: password_hash.to_owned(),
+            created_at: now,
+            updated_at: now,
+            last_login_at: None,
         };
-        let m = am.insert(self.db).await?;
-        Ok(User {
-            id: m.id.to_string(),
-            username: m.username,
-            email: m.email,
-            avatar: m.avatar,
-            status: m.status,
-            password_hash: m.password_hash,
-            created_at: m.created_at.with_timezone(&chrono::Utc),
-            updated_at: m.updated_at.with_timezone(&chrono::Utc),
-            last_login_at: m.last_login_at.map(|d| d.with_timezone(&chrono::Utc)),
+        with_conn(self.db, move |conn| {
+            diesel::insert_into(users::table)
+                .values(new_user)
+                .returning(UserRow::as_returning())
+                .get_result(conn)
+                .map(User::from)
         })
+        .await
     }
 
-    pub async fn find_by_username(&self, username: &str) -> Result<Option<User>> {
-        let opt = users::Entity::find()
-            .filter(users::Column::Username.eq(username))
-            .one(self.db)
-            .await?;
-        Ok(opt.map(|m| User {
-            id: m.id.to_string(),
-            username: m.username,
-            email: m.email,
-            avatar: m.avatar,
-            status: m.status,
-            password_hash: m.password_hash,
-            created_at: m.created_at.with_timezone(&chrono::Utc),
-            updated_at: m.updated_at.with_timezone(&chrono::Utc),
-            last_login_at: m.last_login_at.map(|d| d.with_timezone(&chrono::Utc)),
-        }))
+    pub async fn find_by_username(&self, username_filter: &str) -> Result<Option<User>> {
+        let username = username_filter.to_owned();
+        with_conn(self.db, move |conn| {
+            users::table
+                .filter(users::username.eq(username))
+                .select(UserRow::as_select())
+                .first::<UserRow>(conn)
+                .optional()
+                .map(|opt| opt.map(User::from))
+        })
+        .await
     }
 
     pub async fn find_by_id(&self, id: &str) -> Result<Option<User>> {
@@ -70,30 +108,29 @@ impl<'a> UserRepo<'a> {
             Ok(u) => u,
             Err(_) => return Ok(None),
         };
-        let opt = users::Entity::find_by_id(uuid).one(self.db).await?;
-        Ok(opt.map(|m| User {
-            id: m.id.to_string(),
-            username: m.username,
-            email: m.email,
-            avatar: m.avatar,
-            status: m.status,
-            password_hash: m.password_hash,
-            created_at: m.created_at.with_timezone(&chrono::Utc),
-            updated_at: m.updated_at.with_timezone(&chrono::Utc),
-            last_login_at: m.last_login_at.map(|d| d.with_timezone(&chrono::Utc)),
-        }))
+        with_conn(self.db, move |conn| {
+            users::table
+                .find(uuid)
+                .select(UserRow::as_select())
+                .first::<UserRow>(conn)
+                .optional()
+                .map(|opt| opt.map(User::from))
+        })
+        .await
     }
 
     pub async fn touch_last_login(&self, id: &str) -> Result<()> {
         let uuid = Uuid::parse_str(id)?;
         let now = chrono::Utc::now();
-        let am = users::ActiveModel {
-            id: Set(uuid),
-            last_login_at: Set(Some(now.into())),
-            updated_at: Set(now.into()),
-            ..Default::default()
-        };
-        am.update(self.db).await?;
-        Ok(())
+        with_conn(self.db, move |conn| {
+            diesel::update(users::table.find(uuid))
+                .set((
+                    users::last_login_at.eq(Some(now)),
+                    users::updated_at.eq(now),
+                ))
+                .execute(conn)?;
+            Ok(())
+        })
+        .await
     }
 }

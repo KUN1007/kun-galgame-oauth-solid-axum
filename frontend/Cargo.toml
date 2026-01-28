@@ -1,0 +1,5 @@
+[package]
+name = "oauth-web"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true

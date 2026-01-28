@@ -12,13 +12,12 @@ axum-extra = { version = "0.10.1", features = ["cookie-private"] }
 tower-http = { version = "0.6.6", features = ["fs", "trace"] }
 
 # Database
-sea-orm = { version = "1.1.16", features = [
-    "runtime-tokio-rustls",
-    "sqlx-postgres",
-    "macros",
-    "with-chrono",
-    "with-uuid",
-    "with-json",
+diesel = { version = "2.3.0", features = [
+    "postgres",
+    "r2d2",
+    "chrono",
+    "serde_json",
+    "uuid",
 ] }
 redis = { version = "0.32.5", features = ["tokio-comp"] }
 migration = { path = "../migration" }
